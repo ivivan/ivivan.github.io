@@ -34,7 +34,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -58,14 +58,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -139,11 +139,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2009/07/27/e4-ba-8b-e6-83-85-e6-b0-b8-e8-bf-9c-e9-83-bd-e6-98-af-e4-b8-a4-e9-9d-a2-e7-9a-84/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -151,8 +146,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -163,6 +156,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1041" class="bvMsg"><div>一个人在420的时候，总觉得很落寞，没人陪着说话，没人陪着吃饭，每次试图做一些直立行走运动都要下很大的决心，但同时，也可以随心所欲，安心的看想看的电影，上上blog发发牢骚，挂下最新的热身赛过过球瘾等等；</div> <div>两个人在学校的时候，每天的时间感觉都很紧张，总有种种的安排，吃饭也要看点准时了，短信数量也倍增，日均行走距离更是增加十倍不止，但同时，电影欣赏期又不得不终止了，在很多时候，两个人的口味总是很难达到一致，网也上得少了，球赛情况也不清楚了，总之事情总要在同时感兴趣的前提下才可以展开；</div> <div>两种情况无所谓好与坏，无非是哪种也不能缺，哪种却也不能过长而已…….所以单身与形影不离都是为我所鄙视的行为，前者缺少一种生活，后者也是如此…..</div>  </div>
     
   </div>
+
 </article>
 
 
@@ -230,32 +224,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2009/07/27/e4-ba-8b-e6-83-85-e6-b0-b8-e8-bf-9c-e9-83-bd-e6-98-af-e4-b8-a4-e9-9d-a2-e7-9a-84/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

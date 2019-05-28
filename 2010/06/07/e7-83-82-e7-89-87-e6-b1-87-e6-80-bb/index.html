@@ -37,7 +37,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -61,14 +61,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -142,11 +142,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/06/07/e7-83-82-e7-89-87-e6-b1-87-e6-80-bb/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -154,8 +149,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -166,6 +159,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1791" class="bvMsg"><br><br>烂片：<br><br>#### <a href="http://ivanbuaa.files.wordpress.com/2010/06/untitled.png" target="_blank" rel="noopener"><img src="http://ivanbuaa.files.wordpress.com/2010/06/untitled.png?w=207" alt="untitled.jpg" title="untitled.jpg"></a>看到这个片子还在北航BT蓝种至顶，我就蛋痛不已………..适合脑残、特别是天津脑残观看<br><br>烂片2号<br><br><a href="http://ivanbuaa.files.wordpress.com/2010/06/b0009mdpym.jpg" target="_blank" rel="noopener"><img src="http://ivanbuaa.files.wordpress.com/2010/06/b0009mdpym.jpg?w=251" alt="B0009MDPYM.01.LZZZZZZZ" title="B0009MDPYM.01.LZZZZZZZ"></a><br><br>穿越回2005年看了下当年我想看又没看的片，虽然从里面我看到了无数的大版，但这样也不足已让此片逃离烂片的命运，没看过的人就不要浪费时间了，这里面什么都没有<br><br>当然这个世界上也不是只有烂片，比如说以下还是可以一看的，特别是在你先看过以上两部力作之后<br><br><a href="http://ivanbuaa.files.wordpress.com/2010/06/20100531_457e630106f87fcd4be9diqqobcpkahh5b25d.jpg" target="_blank" rel="noopener"><img src="http://ivanbuaa.files.wordpress.com/2010/06/20100531_457e630106f87fcd4be9diqqobcpkahh5b25d.jpg?w=215" alt="20100531_457e630106f87fcd4be9DiqQoBCpkAHH" title="20100531_457e630106f87fcd4be9DiqQoBCpkAHH"></a><br><br>最近好片写的不多，主要是好片都从电影院看了，3D没有流行的时候，票便宜也不想去看，现在票价一路飞涨，电影院去的次数却是越来越多，真是…………<br>  </div>
     
   </div>
+
 </article>
 
 
@@ -233,32 +227,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/06/07/e7-83-82-e7-89-87-e6-b1-87-e6-80-bb/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

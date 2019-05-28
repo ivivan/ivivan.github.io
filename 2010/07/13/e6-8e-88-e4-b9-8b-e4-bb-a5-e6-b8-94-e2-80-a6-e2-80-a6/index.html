@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/07/13/e6-8e-88-e4-b9-8b-e4-bb-a5-e6-b8-94-e2-80-a6-e2-80-a6/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1827" class="bvMsg"><br><br>计划外重刷系统后，foursquare突然表现的不够稳定了，地点老是刷不出来，让人十分无奈。难道api出问题就赶的这么巧。<br><br>网上很多自已搭建api的方法，以twitter居多，foursquare比较少。大多方法都不适合我这种一没空间二没域名三没服务器的人。不过万事总有取巧的办法，<a href="http://www.apigee.com" target="_blank" rel="noopener">www.apigee.com</a> 简单、易用、免费<br><br>流程平淡无奇，凭印象写一下：<br><br>1. 注册<br><br>2. 确定是哪个服务，如填api.twitter.com 测试<br><br>3. 确定三级地址，测试<br><br>使用时填三级地址，一切正常<br><br>期待此网不要被墙………<br>  </div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/07/13/e6-8e-88-e4-b9-8b-e4-bb-a5-e6-b8-94-e2-80-a6-e2-80-a6/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/07/14/e9-97-b2-e6-9d-a5-e6-97-a0-e4-ba-8b-ef-bc-8c-e5-88-86-e4-ba-ab-e4-b8-aa-e6-8b-bc-e5-9b-be-e6-95-88-e6-9e-9c-e8-bd-af-e4-bb-b6-e2-80-a6/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1834" class="bvMsg"><br><br>云计算的时代真正到来之前，我究竟还要把多少青春年华浪费在无聊的拿移动硬盘传输数据上呢……….<br><br>见网上有很多图片，是那种把N张无关的图片拼成一个具体的形状，常见于各种专辑海报。一直想弄一个，无奈对PS基本无知，最近上网搜索一番，发现专攻此项软件一个：Foto-Mosaik-Edda   操作简单，效果不错，还是个免费的，还带官方中文，值得一用<br><br>上述软件直接搜下在官网下载即可，使用也很简单，基本步骤：<br><br>1. 先建个库，把素材图片都存进去，当然理论上是越多越好，这些将来都做为一块一块小拼图存在<br><br>每张图片都要转化一下再建个索引似乎，比较费时间，当然如果图片本来就比较小还是很快<br><br>2. 选择好小拼图所在的库，然后选一张目标图片，也就是最后要拼成的图案<br><br>选好用多少个小图拼，当然其中基本上有些小图会重复用很多次，主要看底图的色彩组成，如果有大片颜色一样的区域，很可能就被同一张小图重复霸占了<br><br>3.选好生成的图片存放位置，设置下大小和像素，这个大小似乎比较专业，让我搞不太懂。像素不用选太高一般情况<br><br>4. 等待，结束<br>  </div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/07/14/e9-97-b2-e6-9d-a5-e6-97-a0-e4-ba-8b-ef-bc-8c-e5-88-86-e4-ba-ab-e4-b8-aa-e6-8b-bc-e5-9b-be-e6-95-88-e6-9e-9c-e8-bd-af-e4-bb-b6-e2-80-a6/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

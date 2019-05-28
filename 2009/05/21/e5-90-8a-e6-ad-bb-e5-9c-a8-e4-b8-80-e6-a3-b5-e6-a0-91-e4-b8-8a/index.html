@@ -34,7 +34,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -58,14 +58,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -139,11 +139,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2009/05/21/e5-90-8a-e6-ad-bb-e5-9c-a8-e4-b8-80-e6-a3-b5-e6-a0-91-e4-b8-8a/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -151,8 +146,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -163,6 +156,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!822" class="bvMsg"> 都说人不能在一棵树上吊死，平常对这句话感受不深，今天算是真正的体会到了…….<br>昨天通知今天十点有会，晚上三点睡，九点四十挣扎着起床，洗漱后空腹赶到系楼，结果又接到通知说会不开了，我真是！#@#￥<br>不开会也不能再回到幸福的睡觉时光了，只好在420上网乱逛，结果一开傲游，突然发现收藏夹不翼而飞，开始没当回事，关了再开，照旧，又以为是软件哪里设置出了问题，不过看了看也不像。最后google了一下才发现，原来是傲游的服务器出问题了，直接导致无法在线同步更新收藏夹……我多年上网的精华，就在这一刻间烟消云散了<br>不知服务器的故障过几天修复后会不会有什么影响，不过就这几天来看，没有了收藏夹上网，就像没头的苍蝇一样，只能靠google和百度来引导我前进了….基本从上大学开始就一直在用傲游，感觉傲游最大的好处就是可以在线保存收藏夹，比较方便我这种经常会在不同电脑上上网的人士……<br>一直想用用IE8，不过一直不出简体版，无语……….<br><br></div>
     
   </div>
+
 </article>
 
 
@@ -230,32 +224,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2009/05/21/e5-90-8a-e6-ad-bb-e5-9c-a8-e4-b8-80-e6-a3-b5-e6-a0-91-e4-b8-8a/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

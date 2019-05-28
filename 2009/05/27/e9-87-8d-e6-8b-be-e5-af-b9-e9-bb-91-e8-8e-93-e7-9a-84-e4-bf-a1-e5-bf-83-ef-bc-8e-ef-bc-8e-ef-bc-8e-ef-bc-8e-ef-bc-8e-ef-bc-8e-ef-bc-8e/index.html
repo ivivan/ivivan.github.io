@@ -34,7 +34,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -58,14 +58,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -139,11 +139,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2009/05/27/e9-87-8d-e6-8b-be-e5-af-b9-e9-bb-91-e8-8e-93-e7-9a-84-e4-bf-a1-e5-bf-83-ef-bc-8e-ef-bc-8e-ef-bc-8e-ef-bc-8e-ef-bc-8e-ef-bc-8e-ef-bc-8e/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -151,8 +146,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -163,6 +156,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!831" class="bvMsg"><br><br>手里的７２９０自从上次修理之后就被我打入了冷宫，为了防止在上网的时候再次挂掉，毅然决然的停掉了ｇｐｒｓ，走上了无网之路．．．情况一直维持到从楠楠处听说世上还有这么一款神奇的飞信插件为止，虽然当时认为这事纯属郝同学的一厢情愿，可当他测试通过后，还是不得不接受这个现实，这个现实太让人喜悦了，从此，月短信０条也不再是遥不可及的幻梦．．<br><br>考虑到接下来几天要在北戴河度过，不能赶在月底倒数第二天更改套餐，想了想还是决定现在动手，今天就把一切都搞定，反正也就没几天了，偷点流量也不是什么大不了的事情，特别是在想到日后月手机费大减的情况下．．．．．刷飞信系统依旧是一个很痛苦的事情，经过了无数次的反反覆覆，不停的试用替换，最终的效果，飞信，有声音版的ｑｑ，ｍｓｎ，ｇｍａｉｌ，浏览器，都被搞定了，以后的７２９０又刚重现往日繁华了，只是不知，对于先天残疾的他，这次的盛世能持续多久．．．．．不过想想用坏了也好，用坏了，就可以心无所念的去光顾新欢了，就如同西门子被偷买Ｎ机，Ｎ机用坏买黑莓一样．．．．．我在很多时候，还是很渴望一个堂而皇之的理由的．．．．．<br>  </div>
     
   </div>
+
 </article>
 
 
@@ -230,32 +224,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2009/05/27/e9-87-8d-e6-8b-be-e5-af-b9-e9-bb-91-e8-8e-93-e7-9a-84-e4-bf-a1-e5-bf-83-ef-bc-8e-ef-bc-8e-ef-bc-8e-ef-bc-8e-ef-bc-8e-ef-bc-8e-ef-bc-8e/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

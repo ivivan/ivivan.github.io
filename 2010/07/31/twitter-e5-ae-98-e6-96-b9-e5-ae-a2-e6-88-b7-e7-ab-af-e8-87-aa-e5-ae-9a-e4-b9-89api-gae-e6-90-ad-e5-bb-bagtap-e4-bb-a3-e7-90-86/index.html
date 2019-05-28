@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/07/31/twitter-e5-ae-98-e6-96-b9-e5-ae-a2-e6-88-b7-e7-ab-af-e8-87-aa-e5-ae-9a-e4-b9-89api-gae-e6-90-ad-e5-bb-bagtap-e4-bb-a3-e7-90-86/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1875" class="bvMsg"><br><br>有方法而不尝试的感觉是十分让我无法忍受的，今天中午终于走出了这一步，按网上的教程建了个Gtap的twitter api，从目前的情况看，短期内api终于不用求人了………….<br><br>方法记录如下：<br><br>1. 注册Google App Engine<br><br>进<a href="http://appengine.google.com/" title="http://appengine.google.com/" target="_blank" rel="noopener">http://appengine.google.com/</a> 用google帐户登陆，需要用手机收一个验证码，地区选Other，手机号前+86，把验证码一输入，搞定<br><br>填一个地址名，然后自己起一个应用名，结束。据说应用一个google 账号最多建三个，而且不可删除，不知这变态规定现在还实行不实行。<br><br>2.下载安装Google APP Engine的开发环境，和Python，不能使用3或更高的版本 <p>Google App Engine SDK 下载地址 <a href="http://code.google.com/intl/zh-CN/appengine/downloads.html" target="_blank" rel="noopener">http://code.google.com/intl/zh-CN/appengine/downloads.html</a> </p><p>Python 2.6.5 下载地址<a href="http://http://www.python.org" target="_blank" rel="noopener">http://http://www.python.org</a> 去官网找找，现在好像是2.7  </p><p>下载Gtap源码<a href="http://gtap.googlecode.com/files/gtap-0.3.3.tar.gz" target="_blank" rel="noopener">http://gtap.googlecode.com/files/gtap-0.3.3.tar.gz</a> </p><p>安装，很简单又快 </p><p>解压缩gtap文件夹至Google App Engine SKD 安装目录，默认为 X:Program FilesGooglegoogle_appenginegtap </p><p>修改app.yaml文件第一行，把 your_application_name 改为你申请的application name （例如yourid） </p><p>删除secure: always 关闭加密连接(针对当前SSL加密的appspot被墙，不得已而为之) </p><p>3. 运行CMD </p><p>cd X:Program FilesGooglegoogle_appengine </p><p>appcfg.py update gtap </p><p>过程中要输入自已的google账号和密码 </p><p>4. 结束后进入<a href="http://yourid.appspot.com/" target="_blank" rel="noopener">http://<strong>yourid</strong>.appspot.com/</a>看看是否显示“GTAP v0.3.3 is running!” </p><p>一切正常的话，现在你已经有一个可用又安全的twitter api了<br>  </p></div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/07/31/twitter-e5-ae-98-e6-96-b9-e5-ae-a2-e6-88-b7-e7-ab-af-e8-87-aa-e5-ae-9a-e4-b9-89api-gae-e6-90-ad-e5-bb-bagtap-e4-bb-a3-e7-90-86/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

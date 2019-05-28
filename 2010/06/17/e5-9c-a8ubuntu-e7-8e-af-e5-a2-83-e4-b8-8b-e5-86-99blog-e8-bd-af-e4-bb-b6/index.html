@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/06/17/e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e5-86-99blog-e8-bd-af-e4-bb-b6/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1805" class="bvMsg"> 微软的服务用了这么多，就数space用的最多，live套装软件里面，就数win live writer做的最好，可惜还没有ubuntu版本，最近一段时间可能ubuntu用的多一些，老从网页里直接写太麻烦，主要是格式调起来功能太少，基本的格式刷都还没开发出来，上网搜了下，推荐众多，犹以scribefire为甚，好像有独立软件和浏览器插件两种，下了个chrome版试用了下，这个功能么，大眼看去多了一点点，试用一次，看年效果。<div><br></div><div>不过软件虽然推荐的多，设置起来还是有些要注意的，记录在此：</div><div>1.先添加一个blog</div><div>2.从地址里写空间的地址，也就是<a href="http://xxx..spaces.live.com/" target="_blank" rel="noopener">http://xxx..spaces.live.com/</a></div><div>3.然后插件会自己选择blog的类型等等</div><div>4.添加用户名和密码</div><div>估计这个插件应该也是通过win live space的邮件发布功能来生效的，这里先要在空间设置里打开邮件发布功能，设置一个机密字</div><div><a href="mailto:aaa.bbb@space.com" target="_blank" rel="noopener">aaa.bbb@space.com</a></div><div><br></div><div>aaa是用户名，一般也就是第2步里的xxx</div><div>bbb是密码，也就是那个机密字</div><div><br></div><div>然后OK，可以使用，似乎发表完后会加一点类似广告的东西，还没用过，试下看</div><div>PS   没有广告，一切完美，唯一缺点，没法选在space里定义过的日志类别</div><div><br></div></div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/06/17/e5-9c-a8ubuntu-e7-8e-af-e5-a2-83-e4-b8-8b-e5-86-99blog-e8-bd-af-e4-bb-b6/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

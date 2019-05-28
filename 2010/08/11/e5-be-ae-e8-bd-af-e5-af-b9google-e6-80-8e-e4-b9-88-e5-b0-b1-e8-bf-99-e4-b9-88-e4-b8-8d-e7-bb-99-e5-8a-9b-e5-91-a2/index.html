@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/08/11/e5-be-ae-e8-bd-af-e5-af-b9google-e6-80-8e-e4-b9-88-e5-b0-b1-e8-bf-99-e4-b9-88-e4-b8-8d-e7-bb-99-e5-8a-9b-e5-91-a2/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1968" class="bvMsg">Win live 服务整体升级到wave4后，别的特点不多，把web msn整合到主页上算是以前单纯的网页显示状态的升级了<div>东西是不错，不过问题也是多多，当然了，这些问题估计在windows自家的ie系列上是不会存在的</div><div>1. web msn自动登陆，不能选择，这让我很是无语，现在虽然云概念一窝疯，可毕竟还没到大家主动抛弃客户端的时候。很多时候web版太简单了，用着不舒服</div><div>2. 这个微软是不是对程序并行运行有偏执啊，打开一个网页，开一个web端，我就显示一次在其它地方登陆，再开一个又登陆，最多的时候同时在七八个地方登陆，这也太夸张了，程序怎么能设计的这么白痴</div><div>3. 所有msn页面不定时同时崩溃，当然只在chrome里发生，而且只有live页网自己一锅端掉，其它的标签都好好的。这个么，我觉得和那个web端有很大关系</div><div><br></div><div>不知微软会不会修复有关chrome的问题，虽然有些live服务也号称不支持chrome，可不支持也不等于其它的服务也受影响么。不过android版的msn官方端都能流出，还是让人有一丝希望存在……….</div><div><br></div></div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/08/11/e5-be-ae-e8-bd-af-e5-af-b9google-e6-80-8e-e4-b9-88-e5-b0-b1-e8-bf-99-e4-b9-88-e4-b8-8d-e7-bb-99-e5-8a-9b-e5-91-a2/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/07/10/chrome-web-app-e8-af-95-e7-94-a8/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1819" class="bvMsg"><br><br>一直不屑于使用chrome dev版，bug太多，不适合一天开二十个小时浏览器的人。不过为了那三个看似有点意思的web app，还是咬牙升到了dev6.0，加上参数如下：<br><br>*   <code>--enable-apps</code>：用于打开扩展应用，否则你在安装的时候会得到错误提示  <li><code>--apps-panel</code>：这个不是必须的，激活应用控制台的话Chrome将在一个浮动窗口里显示网页应用，而非新建一个标签页<br><br>要新建一个快捷方式再加参数，要不会出问题<br><br>参数正确后，在扩展程序里打开开发者模式，选第一个安装，然后装上三个自带的扩展，地址就在c盘那个隐藏的chrome目录中，很长，最后在6.0文件夹下的resource里，有三个app文件夹<br><br>装上，再新建标签窗口时，就可以选这三个app了，不过doc不能用，听说是因为https被墙了，要用的话必须要把里面的https改一下，麻烦，反正我也不用<br><br>然后就可以新建了，固定住的话下次再开也会自动打开<br><br>用处么，我一直没有发现，感觉还没有扩展程序好用，关键是没有提醒啊，来了邮件也不说一声，虽然说是一直在后台开着，可有什么意思。有些文章里说有提醒机制，不过我没发现。只能等待app升级会有新面貌了。<br><br>附上几个网友作品，基本上就是一个没有地址栏的网页，我感觉<br><br>Facebook <a href="http://www.zebcogs.com/downloads/ds/facebook_app.crx" title="http://www.zebcogs.com/downloads/ds/facebook_app.crx" target="_blank" rel="noopener">http://www.zebcogs.com/downloads/ds/facebook_app.crx</a><br><br>twitter <a href="http://www.zebcogs.com/downloads/ds/twitter_app.crx" title="http://www.zebcogs.com/downloads/ds/twitter_app.crx" target="_blank" rel="noopener">http://www.zebcogs.com/downloads/ds/twitter_app.crx</a><br><br>reader <a href="http://www.zebcogs.com/downloads/ds/reader_app.crx" title="http://www.zebcogs.com/downloads/ds/reader_app.crx" target="_blank" rel="noopener">http://www.zebcogs.com/downloads/ds/reader_app.crx</a><br><br>这几个第三方app，要先选择另存为，下载到本地以后，再拖进浏览器里安装 ，要不会有错误<br><br>闲得蛋痛的人，可以玩玩，要不就算了我看<br>  </li></div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/07/10/chrome-web-app-e8-af-95-e7-94-a8/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2009/07/29/windows-e4-b8-8beclipse-e7-9a-84c-e5-bc-80-e5-8f-91-e7-8e-af-e5-a2-83-e9-85-8d-e7-bd-ae/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1045" class="bvMsg"><br><br>###### 下期毕设的软件，说不准就要用c++，毕竟c++的现成代码摆在这了，比上网找开源还方便，没理由不考虑，用eclipse习惯了，不想看vc6.0恶心的界面，从网上找了找eclipse下c++的配置，转在这，以备不时之需<br><br>安装<br>—-<br>总共需要下面的文件<br>1. Eclipse的CDT 插件<br>   <a href="http://www.eclipse.org/cdt/" target="_blank" rel="noopener">http://www.eclipse.org/cdt/</a><br>2. MinGW, 主要提供编译C/C++文件的GCC、GDB 和 Make<br>   <a href="http://www.mingw.org/download.shtml" target="_blank" rel="noopener">http://www.mingw.org/download.shtml</a><br>安装CDT插件和MinGW,<br><br>插件直接放到相应的文件夹下，MinGW在线安装<br><br>然后修改Windows的环境变量(设MinGW安装在C:MinGW)<br>&quot;PATH&quot; = &quot;C:MinGWbin;%PATH%&quot;<br>&quot;LIBRARY_PATH&quot; = &quot;C:MinGWlib&quot;<br>&quot;C_INCLUDE_PATH&quot; = &quot;C:MinGWinclude&quot;<br>&quot;CPLUS_INCLUDE_PATH&quot; = &quot;C:MinGWincludec++3.2.3;D:MinGWincludec++3.2.3mingw32;D:MinGWincludec++3.2.3backward;D:MinGWinclude&quot;<br>Eclipse 具体使用<br>————<br>1. 新建项目<br>   打开eclipse,new-&gt;project-&gt;Standard Make C++ Project<br>2. 配置Make命令<br>   在Project-&gt;Properties-&gt;C/C++ make project<br>   build command 的“make”改为“mingw32-make”,再按“应用” “确定”<br>3. 新建源代码文件和Makefile文件<br>4. 配置生成目标<br>window-&gt;show view -&gt;make targets  add maketargets  按“ok”,再双击这个maketargets 它就自动帮你make 生成exe<br>5. 在Project-&gt;Properties-&gt;C/C++ Make Project-&gt;Binary Parser 把ELF Parser改成PE Windows Parser<br>6. 大功告成  Run-&gt;Run as-&gt;C Local Application<br>  </div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2009/07/29/windows-e4-b8-8beclipse-e7-9a-84c-e5-bc-80-e5-8f-91-e7-8e-af-e5-a2-83-e9-85-8d-e7-bd-ae/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

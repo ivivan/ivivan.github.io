@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2009/05/11/e6-9c-89-e8-bd-a6-e4-b8-80-e6-97-8f/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!351" class="bvMsg"><div>从刚上大学那会，就一直有个买自行车的想法，好像感觉曾经有买过一个廉价黑车，不过总共应该自已都没想骑过，一点印象也没有了……最后是车子被别人偷了还是被我丢了也不知道。高中那会的车子我很喜欢，不过不幸被偷，让我对家乡人民第一次产生了不好的印象，希望是个新疆贼人，让我心里好受一点……大学迟迟没有动手买，一直觉得买了也用不太上，本人也没有自行车踏青的习惯，北航豆大的点地方，用脚就够了。前几天五一过后去家乐福，本只想买一袋洗衣粉，结果却不巧看到有做活动的自行车在卖，永久的小车，300块。当时只是习惯性的被价格吸引，后来看了看车子也还不错，而且好逮也是个牌子，比从小店里买个三无产品什么的好多了，如此一想，不由冲动了一下，随后的经历就是，两个人用小车推了满满一车东西走回大运村……</div><br><div>车子买了以后还小小的后悔了一下，因为实在想不到对于我这种大运村和420两点一线的人，这个小车的使用机会能有多少。不过有些东西，买之前觉得用处不大，买后就会不自觉得人为创造机会来用了，就比如这个小车的现在。有个车子还是真的不错，今天试了一下，以后八点的课又可以多睡十分钟了，爽哉….</div><br><div>不过我的车技现在发现还是有待提高，特别是小南门一关，很是让我疲于奔命…….</div></div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2009/05/11/e6-9c-89-e8-bd-a6-e4-b8-80-e6-97-8f/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

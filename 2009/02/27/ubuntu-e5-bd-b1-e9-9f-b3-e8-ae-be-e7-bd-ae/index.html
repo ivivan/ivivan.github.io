@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2009/02/27/ubuntu-e5-bd-b1-e9-9f-b3-e8-ae-be-e7-bd-ae/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!249" class="bvMsg"> 这几天终于搞定了ubuntu的影音播放问题，格式基本上我平常用得着的都支持的差不多了……….<br><br>视频方面：装了mplayer和smplayer<br>软件本身装都很方便，主要就是要另装一解码包w32codecs来支持rmvb，avi等等常用格式；主要麻烦的地方在于部分视频字幕的设置，需要手动关联一下简体字库，要不然就会出现乱码情况，总的感觉smplayer做为前台用起来比直接用mplayer要方便一些，更接近于win的习惯，而且smplayer的记忆播放位置功能我感觉很不错。<br>音频方面：用的Rhythmbox<br>软件本身自带，但要想正常使用还得装不少附加产品。要支持mp3需要sudo apt-get install gstreamer0.10-<em>plugins-ugly<br>要支持wma需要sudo apt-get install gstreamer0.10-ffmpeg<br>主要麻烦在于对乱码的解决，步骤如下：转<br><p>首先，需要有软件包mid3iconv。<br></p><p>可以通过如下代码自动安装：<br>sudo apt-get install python-mutagen 　　<br>然后转到你的MP3目录，执行以全命令进行转换：<br>mid3iconv -e GBK </p></em>.mp3 　　<br>如果需要包含子目录，可以将后缀改成如下格式：<br>mid3iconv -e GBK <em>/</em>.mp3<br>最后，重新导入一次rhythmbox就OK了<br>解决Rhythmbox乱码<br><p>子目录可同理包含多层<br><br></p></div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2009/02/27/ubuntu-e5-bd-b1-e9-9f-b3-e8-ae-be-e7-bd-ae/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

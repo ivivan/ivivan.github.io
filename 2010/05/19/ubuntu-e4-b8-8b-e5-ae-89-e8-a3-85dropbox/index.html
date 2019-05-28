@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/05/19/ubuntu-e4-b8-8b-e5-ae-89-e8-a3-85dropbox/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1751" class="bvMsg">在两个实验室间同步文档和保存，dropbox果然是最好的选择，今天把ubuntu的笔记本装上了dropbox，过程曲折，记录为下<div><br></div><div>两种途径：</div><div>1、网站下载 <a href="https://www.getdropbox.com/downloading?os=lnx" target="_blank" rel="noopener">https://www.getdropbox.com/downloading?os=lnx</a>   不过我虽然能打开网址看到下载地址，在伟大的教育网中却下不来，此方式适合外网人士。下载后安装，<span style="color:rgb(34,139,34);font-family:Arial, Helvetica, sans-serif;font-size:14px;line-height:22px;">安装后，打开终端，输入：killall nautilus 回车，搞定。</span></div><div><br></div><div>2、加源</div><div><span style="font-family:Tahoma, Arial, Helvetica;line-height:20px;">首先 gksudo gedit /etc/apt/sources.list</span></div><div><font face="Tahoma, Arial, Helvetica"><span style="line-height:20px;">然后加入以下</span></font></div><div><font face="Tahoma, Arial, Helvetica"><span style="line-height:20px;">deb <a href="http://linux.getdropbox.com/ubuntu" target="_blank" rel="noopener">http://linux.getdropbox.com/ubuntu</a> karmic main<br>deb-src <a href="http://linux.getdropbox.com/ubuntu" target="_blank" rel="noopener">http://linux.getdropbox.com/ubuntu</a> karmic main</span></font></div><div><font face="Tahoma, Arial, Helvetica"><span style="line-height:20px;">保存退出后，再装一个GPG的Key</span></font></div><div><font face="Tahoma, Arial, Helvetica"><span style="line-height:20px;">gpg <code>--</code>keyserver pgp.mit.edu <code>--</code>recv-keys 3565780</span></font></div><div><font face="Tahoma, Arial, Helvetica"><span style="line-height:20px;">刷新一下 </span></font><span style="font-family:Tahoma, Arial, Helvetica;line-height:20px;">sudo apt-get update</span></div><div><font face="Tahoma, Arial, Helvetica"><span style="line-height:20px;">开始安装 </span></font><span style="font-family:Tahoma, Arial, Helvetica;line-height:20px;">sudo apt-get install nautilus-dropbox</span></div><div><font face="Tahoma, Arial, Helvetica"><span style="line-height:20px;">安完之后我出现了以下问题：</span></font></div><div><font face="Tahoma, Arial, Helvetica"><span style="line-height:20px;"><span style="font-family:'Lucida Grande', Verdana, Arial, sans-serif;line-height:19px;">In order to use Dropbox, you must download the proprietary daemon.</span></span></font></div><div><font face="'Lucida Grande', Verdana, Arial, sans-serif"><span style="line-height:19px;">程序在此卡住，后来经上网多方研究发现卡住是因为程序要下载，但下载源被墙了，唉</span></font></div><div><font face="'Lucida Grande', Verdana, Arial, sans-serif"><span style="line-height:19px;">好在网上有有心人，自己下了一个，挂在了如下地址：</span></font></div><div><font face="'Lucida Grande', Verdana, Arial, sans-serif"><span style="line-height:19px;"><a href="http://freedomhui.com/wp-content/uploads/2010/05/dropbox-lnx.x86-0.7.111.tar.gz" target="_blank" rel="noopener">http://freedomhui.com/wp-content/uploads/2010/05/dropbox-lnx.x86-0.7.111.tar.gz</a></span></font></div><div><font face="'Lucida Grande', Verdana, Arial, sans-serif"><span style="line-height:19px;">下载完后是个压缩包，</span></font><span style="font-family:'Lucida Grande', Verdana, Arial, sans-serif;line-height:19px;">~/.dropbox-dist/，记住是将解压之后的结果放在这路径下。从源码可知，第一次启动Dropbox时，他会在这个路径下查找~/.dropbox-dist/dropboxd程序，就是在/home/用户/这个路径下，不过</span><span style="font-family:'Lucida Grande', Verdana, Arial, sans-serif;line-height:19px;">.dropbox-dist是隐藏文件，要注意</span></div><div><font face="'Lucida Grande', Verdana, Arial, sans-serif"><span style="line-height:19px;">然后，就正常启动了，伟大的dropbox</span></font></div><div><span style="color:rgb(51,51,51);font-family:'Lucida Grande', Verdana, Arial, sans-serif;font-size:12px;line-height:19px;"><br></span></div></div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/05/19/ubuntu-e4-b8-8b-e5-ae-89-e8-a3-85dropbox/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

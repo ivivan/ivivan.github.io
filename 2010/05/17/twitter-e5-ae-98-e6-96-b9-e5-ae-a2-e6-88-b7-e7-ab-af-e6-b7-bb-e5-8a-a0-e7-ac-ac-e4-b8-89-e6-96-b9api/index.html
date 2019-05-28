@@ -35,7 +35,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -59,14 +59,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -140,11 +140,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/05/17/twitter-e5-ae-98-e6-96-b9-e5-ae-a2-e6-88-b7-e7-ab-af-e6-b7-bb-e5-8a-a0-e7-ac-ac-e4-b8-89-e6-96-b9api/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -152,8 +147,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -164,6 +157,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1749" class="bvMsg"><br><br>g1用了半年，终于干了第一件不不劳而获的事情，用自已珍藏的一个速度不错的第三方api修改了官方twitter,成功的取代twitteroid成为我现在的首选，现把过程记录如下，基本转载：<br><br>### 安装<br><br>1.先装JAVA环境，JDK/JRE都行，<a href="http://java.sun.com/javase/downloads/index.jsp" target="_blank" rel="noopener">官网下载</a> 装过的就跳过吧 <p>2.下载apktool.jar及相关文件，这里下<a href="http://android-apktool.googlecode.com/files/apktool-1.0.0.tar.bz2" target="_blank" rel="noopener">apktool-1.0.0.tar.bz2 </a>和<a href="http://android-apktool.googlecode.com/files/apktool-install-windows-2.1_r01-1.zip" target="_blank" rel="noopener">apktool-install-windows-2.1_r01-1.zip</a> </p><p>3.解压apktool.jar到 C:Windows 解压apktool-install-windows.zip到任意文件夹(例如D盘根目录) </p><p>4.Win+R 运行CMD，用cd命令转到apktool-install-windows所在文件夹，输入apktool看看。会列出一些帮助的话就成功了。<br><br>### 反编译Twitter客户端<br> </p><p>运行CMD ,转入apktool文件夹运行（我的是D:apktool） </p><p>下载官方twitter的客户端 <a href="http://u.115.com/file/f3c1d017ba" target="_blank" rel="noopener">下载地址</a> &gt; </p><p>进入D:apktool&gt;              输入 apktool d twitter.apk twitter<br><br>打开<a href="http://sourceforge.net/projects/notepad-plus/" target="_blank" rel="noopener">notepad++ </a>按CTRL+F 选择文件查找选项卡 </p><p>选择目录 d:apktoolapktooltwittersmali </p><p>替换<a href="http://twitter.com/" target="_blank" rel="noopener">http://twitter.com/</a>为 api的地址 (例如:<a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">https://gtapserver1.appspot.com/)</a> </p><p>替换<a href="http://api.twitter.com/" target="_blank" rel="noopener">http://api.twitter.com/</a>为 api的地址/api/ (例如:<a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">https://gtapserver1.appspot.com/api/)</a> </p><p>替换<a href="http://search.twitter.com/" target="_blank" rel="noopener">http://search.twitter.com/</a>为 api的地址/search/ (例如:<a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">https://gtapserver1.appspot.com/</a><a href="http://yourid.appspot.com/search/" target="_blank" rel="noopener">search</a><a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">/)</a> </p><p>替换<a href="http:///" target="_blank" rel="noopener">http://www.twitter.com/</a>为 api的地址 (例如:<a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">https://gtapserver1.appspot.com/)</a>) </p><p><a href="https://bylmgg.bay.livefilestore.com/y1mOo1c_i-NsITLMsmTs1-IvKStR75Dufpy0q-xjEMHt-XcupNZb0m7uylOpw7Au5zvC5fbtCBPMC8aA1GlKqKpLRrFA7hEqTZj696I--or2RbIuoBi753w6bVEhKZFA8S09qsxHTFR1RQ7HzZh_UFKgw/image[14].png" target="_blank" rel="noopener"><img src="http://ivanbuaa.files.wordpress.com/2010/05/image_thumb5b105d.png?w=244" alt="image" title="image"></a>  </p><p><br><br>替换后会自动保存，直接退出notepad++<br><br>CMD运行   apktool b twitter    生成的文件在D:apktooltwitterdist下<br><br>### 签名<br> </p><p>1.把修改后的APK包重命名为 unsigned.apk 放到Auto-Sign目录下 <a href="http://lvwind.net/wp-content/uploads/2010/01/Auto-sign.rar" target="_blank" rel="noopener">下载 Auto-Sign</a>（需要java环境） </p><p>auto-sian目录随意 </p><p>2.运行sign.bat签名，在同目录生成signed.apk，这就是签名后的 APK包 </p><p>搞定<br>  </p><p></p></div>
     
   </div>
+
 </article>
 
 
@@ -231,32 +225,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/05/17/twitter-e5-ae-98-e6-96-b9-e5-ae-a2-e6-88-b7-e7-ab-af-e6-b7-bb-e5-8a-a0-e7-ac-ac-e4-b8-89-e6-96-b9api/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

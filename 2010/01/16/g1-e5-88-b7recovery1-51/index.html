@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/01/16/g1-e5-88-b7recovery1-51/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -178,6 +171,7 @@ ga('send', 'pageview');
 </strong><br><br><strong><span style="font-family:Tahoma, Verdana, Helvetica, Arial, sans-serif;font-weight:normal;color:rgb(68,68,68);line-height:22px;"><font size="2">备份/恢复：<br></font><br><font size="2">备份功能还是比较全面的。</font><br><font size="2">提供两种备份方式。一个是Nand备份，一个是Bart备份。</font><font size="2">Bart备份默认只能留下最后一次备份存到SD卡中。</font><font size="2">可以完全备份个人数据。总之，就是你手机里有什么，备份恢复后，得到的完全一样，让你手机完全回到备份时的样子。</font><font size="2"><br></font><br><font size="2">而另一种Nand备份，系统是完全能够备份的，但它有个特别之处就是能够多次备份。在恢复选项里面，可以选择你之前的备份。系统默认是以备份<span style="word-wrap:break-word;line-height:normal;cursor:pointer;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:rgb(255,0,0);white-space:nowrap;">时间</span>作为文件名的（年月日时分秒）。另外这个还可以不含recovery恢复。</font></span></strong><br><br><strong><span style="font-family:Tahoma, Verdana, Helvetica, Arial, sans-serif;font-weight:normal;color:rgb(68,68,68);line-height:22px;"><font size="2"><br></font></span></strong><br><br><strong><span style="font-family:Tahoma, Verdana, Helvetica, Arial, sans-serif;font-weight:normal;color:rgb(68,68,68);line-height:22px;"><font size="2"><span style="font-size:14px;line-height:22px;"><font size="2">7，其它功能：<br></font><font size="2">这部分功能主要是移动手机<span style="word-wrap:break-word;line-height:normal;cursor:pointer;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:rgb(255,0,0);white-space:nowrap;">软件</span>数据至SD分区。这个功能主要是给刚刚进行SD分区的人，这时你的软件还在手机里，SD卡分好区但里面是空的，这时你需要转移手机数据到SD卡分区，即可使用此功能。</font></span></font></span></strong><br><br><strong><span style="font-family:Tahoma, Verdana, Helvetica, Arial, sans-serif;font-weight:normal;color:rgb(68,68,68);line-height:22px;"><font size="2"><span style="font-size:14px;line-height:22px;"><font size="2">刷机方法：</font></span></font></span></strong><br><br><font color="#444444" face="Tahoma, Verdana, Helvetica, Arial, sans-serif"><span style="line-height:normal;font-size:small;">1.电脑端：</span></font><br><br><font color="#444444" face="Tahoma, Verdana, Helvetica, Arial, sans-serif"><span style="line-height:normal;font-size:small;"><span style="font-size:14px;line-height:22px;"><span style="word-wrap:break-word;line-height:normal;cursor:pointer;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:rgb(255,0,0);white-space:nowrap;">下载</span>文件，放到SD卡内<br>在电脑上执行 运行- CMD -进入命令行<span style="word-wrap:break-word;line-height:normal;cursor:pointer;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:rgb(255,0,0);white-space:nowrap;">模式</span>：<br>执行：<br>adb shell<br>$su (not required if you have <span style="word-wrap:break-word;line-height:normal;cursor:pointer;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:rgb(255,0,0);white-space:nowrap;">root</span> already)<br>#mount -a<br>flash_image recovery /sdcard/文件名.im</span></span></font><br><br><font color="#444444" face="Tahoma, Verdana, Helvetica, Arial, sans-serif"><span style="line-height:22px;">2.手机端</span></font><br><br><font color="#444444" face="Tahoma, Verdana, Helvetica, Arial, sans-serif"><span style="line-height:22px;"><span style="color:rgb(0,0,0);font-family:Helvetica, Arial, sans-serif;line-height:25px;"></span></span></font><br><font color="#444444" face="Tahoma, Verdana, Helvetica, Arial, sans-serif"><br><br>把下载的<strong>img</strong>格式文件到SD卡中（为了操作简便把文件名改为<font color="#0033ff">151.img</font>），打开手机的【超级终端】。<br><br>输入命令如下：<br><font color="#e6421a">su</font>【使用高级权限】<br><font color="#e61a1a">flash_image recovery</font><font color="#dd2222"> /sdcard/</font><font color="#3c3cc4"><strong>recovery-RA-dream-v1.5.1.img</strong></font>【刷新刷机模式】（注意要输入sdcard）<br><font color="#000000">　　(<strong>注</strong>：flash_image[空格]recovery[空格]/sdcard/151.img)</font><br><font color="#ee1111">reboot recovery</font> 【重启 并 打开刷机模式】 (<strong>注</strong>：reboot[空格]recovery)<br><br>另：g1打下划线为右alt+E<br></font></span><font color="#444444" face="Tahoma, Verdana, Helvetica, Arial, sans-serif"></font></div></div>
     
   </div>
+
 </article>
 
 
@@ -245,32 +239,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/01/16/g1-e5-88-b7recovery1-51/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

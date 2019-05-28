@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2009/06/14/e5-86-99-e5-9c-a8-e8-81-94-e5-90-88-e4-bc-9a-e6-9d-af-e5-bc-80-e5-b9-95-e4-b9-8b-e5-89-8d/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!921" class="bvMsg"><br><br>逛了趟沃尔玛，回来发现该买的很多东西都忘了买，依然划出一百多块，结完帐惯例去nike店遛了遛，有双花花绿绿的版鞋还不错，可以和过几天要买的跑鞋一起放在考虑清单中……<br><br>回来九点出头，考虑一下暂停健身一次，来420备考加看球。之前已经有感很多遍，毕业之后越来越没有看球的环境和心境，追看联赛的历史已成过往云烟，也可能是长期以来过于压抑看球情感的原因，昨天的中超德比让我看得很是津津有味，坚持着看到了商停补时，而且看过感觉中超踢的还挺是那么回事的，不知是不是自己长期远离五大联赛导致欣赏水平有所下降…..<br><br>联合会杯，前几届其实我都不怎么看，这次算是时间上比较巧，正碰上我考试结束，回家不能，举目无亲，看看也正好排解一下寂寞。前几天看了场欧冠决赛，算是这个学期唯一的一场直播了，在老刘的寝室，人员搭配多多少少让我感觉有些本科的味道，我，T，付统加老刘宿舍李侃吴杨三人，从人数上看也算是小有规模。有酒有菜，有人中场休息，基本上元素都具备了…..<br><br>耐着性子最后看完了颁奖，当年532的变态传统真是让我无语，正常人都会选择在坚持90分钟后一刻不停的放松强撑的精神，而还有人乐此不疲的看完无聊的颁奖真是让我领教，而这其中，竟然有当年想当然的半场酣将付统，物是人非啊……..<br><br>联合会杯，尽量争取多看一点，不能把自己弄得和猪某人一样，被生活强奸的一步步丧失男人特征……..<br>  </div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2009/06/14/e5-86-99-e5-9c-a8-e8-81-94-e5-90-88-e4-bc-9a-e6-9d-af-e5-bc-80-e5-b9-95-e4-b9-8b-e5-89-8d/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

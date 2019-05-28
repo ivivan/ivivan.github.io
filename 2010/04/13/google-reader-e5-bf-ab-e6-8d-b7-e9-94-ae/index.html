@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/04/13/google-reader-e5-bf-ab-e6-8d-b7-e9-94-ae/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1739" class="bvMsg">没有reader的生活是不能接受的…………..<div><div>浏览</div><div>j/k： 下一个/上一个项目</div><div>空格： 下一个项目或页面</div><div>&lt;Shift&gt; + 空格： 上一个项目或页面</div><div>n/p： 向下/向上扫描项目（仅列表）</div><div>&lt;Shift&gt; + n/p： 下一个/上一个订阅</div><div>&lt;Shift&gt; + x： 展开文件夹 </div><div>&lt;Shift&gt; + o： 打开订阅或文件夹</div><div><br></div><div>对项目采取行动</div><div>s： 为项目加注星标</div><div>&lt;Shift&gt; + s： 共享项目</div><div>v： 查看原始内容</div><div>t： 标记项目</div><div>m： 将项目标为已读/未读</div><div>或输入： 展开/折叠项目（仅限列表）</div><div>&lt;Shift&gt; + a： 全部标为已读</div><div>e： 通过电子邮件发送项目</div><div><br></div><div>跳转 应用程序</div><div>g 然后 h： 转到主页</div><div>g 然后 a： 转到所有项目</div><div>g 然后 s： 转到加星标项目 </div><div>g 然后 &lt;Shift&gt; + s： 转到共享项目</div><div>g 然后 u： 打开订阅选择器 </div><div>g 然后 t： 打开标签选择器 </div><div>g 然后 &lt;Shift&gt; + t： 转到趋势页 </div><div>g 然后 d： 转到查找页</div><div><br></div><div>应用程序</div><div>r： 刷新</div><div>u： 切换至全屏模式</div><div>1: 切换至扩展视图</div><div>2: 切换至列表视图</div><div>/: 将光标移动到搜索框</div><div>a: 添加订阅</div></div></div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/04/13/google-reader-e5-bf-ab-e6-8d-b7-e9-94-ae/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 

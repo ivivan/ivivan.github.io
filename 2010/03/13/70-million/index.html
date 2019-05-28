@@ -33,7 +33,7 @@
     <link rel="icon" href="/favicon.ico">
   
 
-  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
 
 
   
@@ -57,14 +57,14 @@ ga('send', 'pageview');
 
   
 
-
-  
-    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 
+
   
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
+
 </head>
 </html>
 <body>
@@ -138,11 +138,6 @@ ga('send', 'pageview');
 
 
       
-        <span>
-          <i class="icon-comment"></i>
-          <a href="http://www.ivivan.com//2010/03/13/70-million/#disqus_thread"></a>
-        </span>
-      
 
       
       <i class="fa fa-eye"></i> 
@@ -150,8 +145,6 @@ ga('send', 'pageview');
            &nbsp热度 <span id="busuanzi_value_page_pv">
            <i class="fa fa-spinner fa-spin"></i></span>℃
         </span>
-      
-
       
       
     </div>
@@ -162,6 +155,7 @@ ga('send', 'pageview');
       <div id="msgcns!1326AB98D6395CF4!1711" class="bvMsg"><br><br><font face="微软雅黑">毫无疑问，在我自感低迷的2010年音乐世界中，这是唯一让我看了三次的MV</font><br><br><a href="http://player.youku.com/player.php/sid/XMTU1MjY0MDIw/v.swf" target="_blank" rel="noopener">http://player.youku.com/player.php/sid/XMTU1MjY0MDIw/v.swf</a><br><br>1.《最后的晚餐》达·芬奇<br>2.《维纳斯诞生》波提切利<br>3.《蒂尔普医生的解剖课》伦勃朗<br>4.《亨利八世》小汉斯·荷尔拜因、《戴珍珠耳环的少女》维米尔<br>5.《梅杜萨之筏》泰奥多尔·籍里柯<br>6.《马拉之死》路易·达维特<br>7.《创造亚当》米开朗琪罗<br>8.《男人之子》勒内·马格里特<br>9.《红黄蓝的构成》蒙德里安<br>10.《自画像》弗里达·卡罗<br>11.《多拉·玛尔》毕加索<br>12.《呐喊》爱德华·蒙克<br>13.《自画像》凡·高  <p>14.《玛丽莲·梦露》安迪·沃霍尔<br>15.《浴中加布莉埃尔与她的一位姐妹》佚名（法国枫丹白露画派）<br>16.《宝座上的圣母》乔托<br>17.《带着施洗约翰头颅的莎乐美》卡拉瓦乔<br>18.《奥林匹亚》马奈<br>19.《自由引导人民》德拉克罗瓦<br>20.《新闻记者西尔维亚·冯·哈尔登的画像》奥托·迪克斯<br>21.《吻》克里姆特<br>22.《新娘》马克·夏加尔<br>23.《宫娥》委拉斯开兹<br>24.《向日葵》凡·高<br><br>各名画可详见豆瓣相关帖<a href="http://www.douban.com/note/62440620/" target="_blank" rel="noopener">http://www.douban.com/note/62440620/</a><br>  </p></div>
     
   </div>
+
 </article>
 
 
@@ -229,32 +223,41 @@ ga('send', 'pageview');
   
       <div class="fexo-comments comments-post">
     
-  <section class="disqus-comments">
-    <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-  </section>
-
-  <script>
-    var disqus_shortname = 'ivivan';
-    
-    var disqus_url = 'http://www.ivivan.com/2010/03/13/70-million/';
-    
-    (function(){
-      var dsq = document.createElement('script');
-      dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-
-  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
-
-
 
     
 
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '9d6d57bab8bef08d6d35',
+  clientSecret: 'be42bfe70282fd46c494df3481cf83302c1f21b4',
+  repo: 'ivivan.github.io',
+  owner: 'ivivan',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['ivivan'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
 
 
 
