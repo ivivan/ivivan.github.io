@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>FastDFS分布式文件系统 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="FastDFS,">
+  
+
+  <meta name="description" content="修改HDFS困难重重，FastDFS里有个Group的概念可以变通的解决现有问题，安装如下： &amp;nbsp; FastDFS源码及AＰＩ下载：https://code.google.com/p/fastdfs/downloads 安装libevent，请确认安装路径是 /usr，下载：http://monkey.org/~provos/libevent/ 解压 libevent ，然后进入解压后的目">
+<meta name="keywords" content="FastDFS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FastDFS分布式文件系统">
+<meta property="og:url" content="http://www.ivivan.com/2013/09/12/fastdfs-e5-88-86-e5-b8-83-e5-bc-8f-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="修改HDFS困难重重，FastDFS里有个Group的概念可以变通的解决现有问题，安装如下： &amp;nbsp; FastDFS源码及AＰＩ下载：https://code.google.com/p/fastdfs/downloads 安装libevent，请确认安装路径是 /usr，下载：http://monkey.org/~provos/libevent/ 解压 libevent ，然后进入解压后的目">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:image" content="http://soartju.iteye.com/images/icon_star.png">
+<meta property="og:updated_time" content="2017-01-06T16:53:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FastDFS分布式文件系统">
+<meta name="twitter:description" content="修改HDFS困难重重，FastDFS里有个Group的概念可以变通的解决现有问题，安装如下： &amp;nbsp; FastDFS源码及AＰＩ下载：https://code.google.com/p/fastdfs/downloads 安装libevent，请确认安装路径是 /usr，下载：http://monkey.org/~provos/libevent/ 解压 libevent ，然后进入解压后的目">
+<meta name="twitter:image" content="http://soartju.iteye.com/images/icon_star.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-FastDFS"><span class="toc-text">安装 FastDFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#、配置及启动Tracker-Server"><span class="toc-text">、配置及启动Tracker Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、配置及启动Storage-Server"><span class="toc-text">2、配置及启动Storage Server</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-fastdfs-e5-88-86-e5-b8-83-e5-bc-8f-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">FastDFS分布式文件系统</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2013.09.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/国境以南/">国境以南</a> / <a class="article-category-link" href="/categories/国境以南/工作相关/">工作相关</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.ivivan.com//2013/09/12/fastdfs-e5-88-86-e5-b8-83-e5-bc-8f-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>修改HDFS困难重重，FastDFS里有个Group的概念可以变通的解决现有问题，安装如下：</p>
+<p>&nbsp;</p>
+<p>FastDFS源码及AＰＩ下载：<a href="https://code.google.com/p/fastdfs/downloads" target="_blank" rel="noopener">https://code.google.com/p/fastdfs/downloads</a></p>
+<p>安装libevent，请确认安装路径是 /usr，下载：<a href="http://monkey.org/~provos/libevent/" target="_blank" rel="noopener">http://monkey.org/~provos/libevent/</a></p>
+<p>解压 libevent ，然后进入解压后的目录分别执行：</p>
+<ol>
+<li>./configure –prefix=/usr</li>
+<li>make clean;</li>
+<li>make</li>
+<li>make install<br>注意４步权限</li>
+</ol>
+<h2 id="安装-FastDFS"><a href="#安装-FastDFS" class="headerlink" title="安装 FastDFS"></a><strong>安装 FastDFS</strong></h2><p>同样习惯解压到/usr</p>
+<p>由于要使用内置的 http 服务，因此编辑 %FastDFS%/make.sh 文件，找到<br>_#WITH_HTTPD=1_<br>修改成<br>_WITH_HTTPD=1_<br>以支持 http</p>
+<p>进入FastDFS根目录，执行：</p>
+<p>./make.sh</p>
+<p>./make.sh install</p>
+<p>如安装时报错如下：</p>
+<ol>
+<li><p>/home/FastDFS/FastDFS/tracker/../common/sched_thread.c:493: undefined reference to `pthread_create’ ../common/pthread_func.o:   …..<br>经过在网上的查找得知：其实是不同的系统中pthread位置不一样，做法就是找到你的系统中所需要的libpthread.so文件位置，直接find就可以找到了；</p>
+<div>
+</div></li>
+<li><p>root@ <a href="http://www.linuxidc.com:~#" target="_blank" rel="noopener">www.linuxidc.com:~#</a> find / -name ‘libpthread.a’</p>
+</li>
+<li>/usr/lib/i386-linux-gnu/xen/libpthread.a</li>
+<li>/usr/lib/i386-linux-gnu/libpthread.a</li>
+<li>root@ <a href="http://www.linuxidc.com:~#" target="_blank" rel="noopener">www.linuxidc.com:~#</a> find / -name ‘libpthread.so’</li>
+<li><p>/usr/lib/i386-linux-gnu/libpthread.so<br><br>接着直接在make.sh中找到这句话然后替换掉就可以了：</p>
+<div>
+</div></li>
+<li><p>if [ -f /usr/lib/libpthread.so ] || [ -f /usr/local/lib/libpthread.so ] || [ -f /usr/lib64/libpthread.so ] || [ -f /usr/lib/libpthread.a ] || [ -f /usr/local/lib/libpthread.a ] || [ -f /usr/lib64/libpthread.a ]; then   <span style="color:#ff0000;">LIBS</span>=<span style="color:#0000ff;">“$LIBS -lpthread”</span><br><br>然后在进行编译就OK了。</p>
+</li>
+</ol>
+<p>6. 修改配置文件(默认配置文件在路径/etc/fdfs 目录下 )，tracker 可以使用默认配置<br>默认使用22122 端口</p>
+<p>#启动Tracker Server<br>/usr/local/bin/fdfs_trackerd /etc/fdfs/tracker.conf</p>
+<p>#启动过程中出现的错误（成功安装libevent 就不会出现这个问题）</p>
+<p>#./fdfs_trackerd: error while loading shared libraries: libevent-2.0.so.5: cannot open shared object file: No such file or directory</p>
+<p>#解决办法<br>ln -s /usr/lib/libevent-2.0.so.5 /usr/lib64/libevent-2.0.so.5</p>
+<p>&nbsp;</p>
+<p>配置：</p>
+<p>&nbsp;</p>
+<p>FastDFS的配置文件在%FastDFS%/conf目录下，其中包括<br>Client.conf    客户端上传配置文件<br>Storage.conf    文件存储服务器配置文件<br>Tracker.conf    负责均衡调度服务器配置文件<br>http.conf        http服务器配置文件</p>
+<p>&nbsp;</p>
+<h2 id="、配置及启动Tracker-Server"><a href="#、配置及启动Tracker-Server" class="headerlink" title="、配置及启动Tracker Server"></a>、配置及启动Tracker Server</h2><p>A、修改%FastDFS%/conf/tracker.conf文件,修改如下</p>
+<p>#可以自己指定目录位置，但目录必须存在，用于存储日志及storage server等信息，否则tracker server无法启动</p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<ol>
+<li><p>base_path=/home/yuqing/fastdfs -&gt; base_path=/home/soar/fastdfs_tracker<br></p></li></ol></div><br>#改成你想要的http端口，将来http下载文件的端口就是他了<p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>http.server_port=8080 -&gt; http.server_port=8090<br></p></li></div><br>#http支持<p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>##include http.conf -&gt; #include http.conf<br></p></li></div><br>#默认4GB，如果空间不足，建议调小，否则会报no free space的异常，无法正常启动<p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>reserved_storage_space = 4GB -&gt; reserved_storage_space = 1GB<br></p></li></div><br>#tracker server对storage server供服务的端口，使用默认的即可，也可以自定义<p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>port=22122<br></p></li></div><br>&nbsp;<p></p>
+
+
+<p>B、将http.conf文件拷贝到/etc/fdfs目录下，执行</p>
+<div id><br><div><br><div>Shell代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<ol>
+<li><p>sudo cp %FastDFS%/conf/http.conf /etc/fdfs/<br></p></li></ol></div><br>注：为了支持http，必须将这个文件拷贝到此目录，否则无法启动，报param http.XXX not exist or is empty类似的错误<br>C、进入/usr/local/bin/目录，启动tracker服务器，执行<p></p>
+<div id><br><div><br><div>Shell代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>sudo fdfs_trackerd %FastDFS%/conf/tracker.conf</p>
+</li>
+
+<h2 id="2、配置及启动Storage-Server"><a href="#2、配置及启动Storage-Server" class="headerlink" title="2、配置及启动Storage Server"></a>2、配置及启动Storage Server</h2><p>A、修改%FastDFS%/conf/storage.conf文件,修改如下：</p>
+<p>#可以自定义，但必须存在此目录，用于存储storage相关的log、group内的相关信息</p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<ol>
+<li><p>base_path=/home/yuqing/fastdfs -&gt; /home/soar/fastdfs_storge<br></p></li></ol></div><br>#文件的存储位置，在一台storage server上可以指定多个存储位置<p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>store_path0=/home/yuqing/fastdfs -&gt; store_path0=/home/soar/fastdfs_storge<br></p></li></div><br>#必须指定<p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>group_name=group1<br></p></li></div><br>#修改成tracker server的IP和端口信息<p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>tracker_server=192.168.209.121:22122 -&gt; tracker_server=10.0.2.15:22122<br></p></li></div><br>#http支持<p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>##include http.conf -&gt;#include http.conf<br></p></li></div><br>&nbsp;<p></p>
+
+
+<p>B、进入/usr/local/bin/目录，启动storage服务器，执行</p>
+<div id><br><div><br><div>Shell代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<ol>
+<li>sudo fdfs_storaged %FastDFS%/conf/storage.conf<br>客户端修改：</li>
+</ol>
+<p>1、修改%FastDFS%/conf/client.conf文件,修改如下：</p>
+<p>#可自定义，但此目录必须存在，用于存放文件上传log</p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<ol>
+<li><p>base_path=/home/yuqing/fastdfs-&gt; base_path=/home/soar/fastdfs_tracker<br></p></li></ol></div><p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>tracker_server=192.168.209.121:22122 -&gt; tracker_server=10.0.2.15:22122<br></p></li></div><p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>http.tracker_server_port=8080 -&gt;http.tracker_server_port=8090<br></p></li></div><br>#支持http<p></p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<li><p>##include http.conf -&gt;#include http.conf<br></p></li></div><br>&nbsp;<p></p>
+
+
+<p>2、进入/usr/local/bin/目录，上传文件，执行</p>
+<div id><br><div><br><div>Txt代码  <a title="收藏这段代码"><img src="http://soartju.iteye.com/images/icon_star.png" alt="收藏代码"></a></div><br></div>
+
+<ol>
+<li>sudo fdfs_test %FastDFS%/conf/client.conf upload a.txt<br>&nbsp;</li>
+</ol>
+<p>test里测试文件返回链接仅为示例，无法打开正常</p>
+<p>&nbsp;</p>
+<p>配置总结：</p>
+<p>很简单，基本只要把conf里local path, server address, port number，　group name定义一下即可</p>
+<p>&nbsp;</p>
+<p>没有web UI，这个分布式系统简陋的有点让人无法接受，还好Java API比较简单，功能简单，使用简单</p>
+<p>附实例一择，上传文件到指定Group，已修改并测试</p>
+<p>不明白为什么明明Cluster里设置了四个Storage Server并且全部可以上传文件成功，但这里只显示一个，实在懒得搞清楚</p>
+<p>import java.io.File;<br>import java.io.FileInputStream;</p>
+<p>import org.csource.common.NameValuePair;<br>import org.csource.fastdfs.ClientGlobal;<br>import org.csource.fastdfs.ServerInfo;<br>import org.csource.fastdfs.StorageClient;<br>import org.csource.fastdfs.StorageServer;<br>import org.csource.fastdfs.TrackerClient;<br>import org.csource.fastdfs.TrackerServer;</p>
+<p>/**</p>
+<ul>
+<li>测试上传</li>
+<li>@author gary<br><em>
+</em>/<br>public class TestUpload {<br>public static void main(String[] args) throws Exception{<br>// String classPath = new File(TestUpload.class.getResource(“/“).getFile()).getCanonicalPath();<br>// String configFilePath = classPath + File.separator + “fdfs_client.conf”;<br>String configFilePath = “/usr/FastDFS/conf/client.conf”;</li>
+</ul>
+<p>System.out.println(“配置文件:” + configFilePath);</p>
+<p>ClientGlobal.init(configFilePath);</p>
+<p>TrackerClient trackerClient = new TrackerClient();<br>TrackerServer trackerServer = trackerClient.getConnection();</p>
+<p>StorageServer storageServer = null;<br>StorageClient storageClient = new StorageClient(trackerServer, storageServer);</p>
+<p>NameValuePair[] meta_list = new NameValuePair[3];<br>meta_list[0] = new NameValuePair(“width”, “120”);<br>meta_list[1] = new NameValuePair(“heigth”, “120”);<br>meta_list[2] = new NameValuePair(“author”, “gary”);</p>
+<p>// byte[] file_buff = “F:\pic.jpg”.getBytes(ClientGlobal.g_charset);<br>File file = new File(“/home/ivan/Downloads/README.txt”);<br>FileInputStream fis = new FileInputStream(file);<br>byte[] file_buff = null;<br>if(fis != null){<br>int len = fis.available();<br>file_buff = new byte[len];<br>fis.read(file_buff);<br>}<br>System.out.println(“file length: “ + file_buff.length);</p>
+<p>String group_name = null;<br>StorageServer[] storageServers = trackerClient.getStoreStorages(trackerServer, group_name);<br>if (storageServers == null) {<br>System.err.println(“get store storage servers fail, error code: “ + storageClient.getErrorCode());<br>}else{<br>System.err.println(“store storage servers count: “ + storageServers.length);<br>for (int k = 0; k &lt; storageServers.length; k++){<br>System.err.println(k + 1 + “. “ + storageServers[k].getInetSocketAddress().getAddress().getHostAddress() + “:” + storageServers[k].getInetSocketAddress().getPort());<br>}<br>System.err.println(“”);<br>}</p>
+<p>long startTime = System.currentTimeMillis();<br>// String[] results = storageClient.upload_file(file_buff, “jpg”, meta_list);</p>
+<p>String[] results = storageClient.upload_file(“group3”, file_buff, “jpg”, meta_list);<br>// upload_file(file_buff, “jpg”, meta_list);</p>
+<p>System.out.println(“upload_file time used: “ + (System.currentTimeMillis() - startTime) + “ ms”);</p>
+<p>if (results == null){<br>System.err.println(“upload file fail, error code: “ + storageClient.getErrorCode());<br>return;<br>}</p>
+<p>group_name = results[0];<br>String remote_filename = results[1];<br>System.err.println(“group_name: “ + group_name + “, remote_filename: “ + remote_filename);<br>System.err.println(storageClient.get_file_info(group_name, remote_filename));</p>
+<p>ServerInfo[] servers = trackerClient.getFetchStorages(trackerServer, group_name, remote_filename);<br>if (servers == null){<br>System.err.println(“get storage servers fail, error code: “ + trackerClient.getErrorCode());<br>} else {<br>System.err.println(“storage servers count: “ + servers.length);<br>for (int k = 0; k &lt; servers.length; k++){<br>System.err.println(k + 1 + “. “ + servers[k].getIpAddr() + “:” + servers[k].getPort());<br>}<br>System.err.println(“”);<br>}<br>}<br>}</p>
+<p>此文件系统没有提供遍例文件的AＰＩ,　也不可以自定义上传文件名称，让人实在是无语至极，只能手动保存一份文件名映射凑合着用一下～</p>
+<p></p></div><br></div><br></div><p></p>
+
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2013/09/02/e5-a4-9c-e7-a9-ba-e4-b8-ad-e6-9c-80-e4-ba-ae-e7-9a-84-e6-98-9f/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2013/09/18/e6-98-a5-e6-9a-96-e8-8a-b1-e5-bc-80/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'ivivan';
+    
+    var disqus_url = 'http://www.ivivan.com/2013/09/12/fastdfs-e5-88-86-e5-b8-83-e5-bc-8f-e6-96-87-e4-bb-b6-e7-b3-bb-e7-bb-9f/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

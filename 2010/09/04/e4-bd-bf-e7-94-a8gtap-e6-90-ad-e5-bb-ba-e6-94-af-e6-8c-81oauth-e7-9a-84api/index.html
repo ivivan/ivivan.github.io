@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>使用GTAP搭建支持OAUTH的API | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it">
+  
+
+  <meta name="description" content="GTAP升级到了0.4X版本，设置方法有些变化，补充在此：1. 先下载最新的GTAP，地址：http://goo.gl/UVLV2. 登陆http://goo.gl/9tqP打开twitter应用申请页面。有几个地方需要注意： a、在Application Type项选择Browser； b、在Callback URL:输入“https://application-ID.appspot.com/o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用GTAP搭建支持OAUTH的API">
+<meta property="og:url" content="http://www.ivivan.com/2010/09/04/e4-bd-bf-e7-94-a8gtap-e6-90-ad-e5-bb-ba-e6-94-af-e6-8c-81oauth-e7-9a-84api/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="GTAP升级到了0.4X版本，设置方法有些变化，补充在此：1. 先下载最新的GTAP，地址：http://goo.gl/UVLV2. 登陆http://goo.gl/9tqP打开twitter应用申请页面。有几个地方需要注意： a、在Application Type项选择Browser； b、在Callback URL:输入“https://application-ID.appspot.com/o">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-01-06T16:53:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用GTAP搭建支持OAUTH的API">
+<meta name="twitter:description" content="GTAP升级到了0.4X版本，设置方法有些变化，补充在此：1. 先下载最新的GTAP，地址：http://goo.gl/UVLV2. 登陆http://goo.gl/9tqP打开twitter应用申请页面。有几个地方需要注意： a、在Application Type项选择Browser； b、在Callback URL:输入“https://application-ID.appspot.com/o">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-e4-bd-bf-e7-94-a8gtap-e6-90-ad-e5-bb-ba-e6-94-af-e6-8c-81oauth-e7-9a-84api" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">使用GTAP搭建支持OAUTH的API</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2010.09.04</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/工作相关/">工作相关</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.ivivan.com//2010/09/04/e4-bd-bf-e7-94-a8gtap-e6-90-ad-e5-bb-ba-e6-94-af-e6-8c-81oauth-e7-9a-84api/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <div id="msgcns!1326AB98D6395CF4!2713" class="bvMsg"><br><br>GTAP升级到了0.4X版本，设置方法有些变化，补充在此：<br><br>1. 先下载最新的GTAP，地址：<a href="http://goo.gl/UVLV" title="http://goo.gl/UVLV" target="_blank" rel="noopener">http://goo.gl/UVLV</a><br><br>2. 登陆<a href="http://goo.gl/9tqP" title="http://goo.gl/9tqP" target="_blank" rel="noopener">http://goo.gl/9tqP</a>打开twitter应用申请页面。有几个地方需要注意： <p>a、在Application Type项选择Browser； </p><p>b、在Callback URL:输入“<a href="https://application-ID.appspot.com/oauth/twitter/callback”记得把application-ID替换成你在GAE中申请的application-ID,例如abc" target="_blank" rel="noopener">https://application-ID.appspot.com/oauth/twitter/callback”记得把application-ID替换成你在GAE中申请的application-ID,例如abc</a> </p><p>c 、在Default Access type项选择Read &amp; Write读写方式。 </p><p>3. 填写完毕后，点击 Resigter application 按钮，生成你的twitter应用。 </p><p>4. 在application成功页面，twitter会给你的application生成对应的Consumer key和Consumer secret。记住这两个值。复制下来 </p><p>5. 用写字板或其他支持 Unix 换行风格的文本编辑器打开 app.yaml，把第 1 行的 “application: ” 后面部分改成刚才在 GAE 上的那个 Application Identifier，按照前面的假设，这里就应该改成 gtap，再把第 12 行的 “secure: always” 改成 “secure: optional”，最后 app.yaml 应该像下面这样。 &gt; </p><p><code>application: abc
+&gt; version: 1
+&gt; runtime: python
+&gt; api_version: 1</code> </p><p>handlers:<br>&gt; - url: /static<br>&gt; static_dir: static </p><p>- url: /.*<br>&gt; script: main.py<br>&gt; secure: optional<br><br>6. 用写字板或其他支持 Unix 换行风格的文本编辑器打开 main.py，把在 Twitter 上建立 APP 获得的 CONSUMER_KEY 跟 CONSUMER_SECRET 替换第 14、15 行的对应内容。照旧上传<br><br>7. 在浏览器中打开这个 API 地址 <a href="http://abc.appspot.com" target="_blank" rel="noopener">http://abc.appspot.com</a>，点击 “Sign in with Twitter”，在Twitter官网登录后点 “Allow”，重定向后会显示 current key，这就是在 Twitter 客户端使用这个 API 登录用的密码，最好改成容易记住的组合，在下面的 the new key 中填入，然后点击 “Change the Key”。<br>  </p></div>
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2010/08/20/e6-a8-aa-e7-89-88-e5-8a-a8-e4-bd-9c-e8-bf-87-e5-85-b3-e6-b8-b8-e6-88-8f-ef-bc-8c-e4-bb-8a-e5-b9-b4-e5-b0-b1-e5-8f-aa-e5-87-86-e5-a4-87-e7-8e-a9-e8-bf-99-e4-b8-80-e6-ac-be-e4-ba-86-e2-80-a6-e2-80-a6/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2010/09/06/g1-e5-ad-97-e4-bd-93-e7-a7-bb-e5-8a-a8/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'ivivan';
+    
+    var disqus_url = 'http://www.ivivan.com/2010/09/04/e4-bd-bf-e7-94-a8gtap-e6-90-ad-e5-bb-ba-e6-94-af-e6-8c-81oauth-e7-9a-84api/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

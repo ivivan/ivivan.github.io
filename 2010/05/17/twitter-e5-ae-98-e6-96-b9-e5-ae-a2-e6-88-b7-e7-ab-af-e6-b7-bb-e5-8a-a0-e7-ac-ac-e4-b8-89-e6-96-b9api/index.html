@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>twitter官方客户端添加第三方API | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it">
+  
+
+  <meta name="description" content="g1用了半年，终于干了第一件不不劳而获的事情，用自已珍藏的一个速度不错的第三方api修改了官方twitter,成功的取代twitteroid成为我现在的首选，现把过程记录如下，基本转载：### 安装1.先装JAVA环境，JDK/JRE都行，官网下载 装过的就跳过吧 2.下载apktool.jar及相关文件，这里下apktool-1.0.0.tar.bz2 和apktool-install-wind">
+<meta property="og:type" content="article">
+<meta property="og:title" content="twitter官方客户端添加第三方API">
+<meta property="og:url" content="http://www.ivivan.com/2010/05/17/twitter-e5-ae-98-e6-96-b9-e5-ae-a2-e6-88-b7-e7-ab-af-e6-b7-bb-e5-8a-a0-e7-ac-ac-e4-b8-89-e6-96-b9api/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="g1用了半年，终于干了第一件不不劳而获的事情，用自已珍藏的一个速度不错的第三方api修改了官方twitter,成功的取代twitteroid成为我现在的首选，现把过程记录如下，基本转载：### 安装1.先装JAVA环境，JDK/JRE都行，官网下载 装过的就跳过吧 2.下载apktool.jar及相关文件，这里下apktool-1.0.0.tar.bz2 和apktool-install-wind">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2010/05/image_thumb5b105d.png?w=244">
+<meta property="og:updated_time" content="2017-01-06T16:53:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="twitter官方客户端添加第三方API">
+<meta name="twitter:description" content="g1用了半年，终于干了第一件不不劳而获的事情，用自已珍藏的一个速度不错的第三方api修改了官方twitter,成功的取代twitteroid成为我现在的首选，现把过程记录如下，基本转载：### 安装1.先装JAVA环境，JDK/JRE都行，官网下载 装过的就跳过吧 2.下载apktool.jar及相关文件，这里下apktool-1.0.0.tar.bz2 和apktool-install-wind">
+<meta name="twitter:image" content="http://ivanbuaa.files.wordpress.com/2010/05/image_thumb5b105d.png?w=244">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-twitter-e5-ae-98-e6-96-b9-e5-ae-a2-e6-88-b7-e7-ab-af-e6-b7-bb-e5-8a-a0-e7-ac-ac-e4-b8-89-e6-96-b9api" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">twitter官方客户端添加第三方API</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2010.05.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/工作相关/">工作相关</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.ivivan.com//2010/05/17/twitter-e5-ae-98-e6-96-b9-e5-ae-a2-e6-88-b7-e7-ab-af-e6-b7-bb-e5-8a-a0-e7-ac-ac-e4-b8-89-e6-96-b9api/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <div id="msgcns!1326AB98D6395CF4!1749" class="bvMsg"><br><br>g1用了半年，终于干了第一件不不劳而获的事情，用自已珍藏的一个速度不错的第三方api修改了官方twitter,成功的取代twitteroid成为我现在的首选，现把过程记录如下，基本转载：<br><br>### 安装<br><br>1.先装JAVA环境，JDK/JRE都行，<a href="http://java.sun.com/javase/downloads/index.jsp" target="_blank" rel="noopener">官网下载</a> 装过的就跳过吧 <p>2.下载apktool.jar及相关文件，这里下<a href="http://android-apktool.googlecode.com/files/apktool-1.0.0.tar.bz2" target="_blank" rel="noopener">apktool-1.0.0.tar.bz2 </a>和<a href="http://android-apktool.googlecode.com/files/apktool-install-windows-2.1_r01-1.zip" target="_blank" rel="noopener">apktool-install-windows-2.1_r01-1.zip</a> </p><p>3.解压apktool.jar到 C:Windows 解压apktool-install-windows.zip到任意文件夹(例如D盘根目录) </p><p>4.Win+R 运行CMD，用cd命令转到apktool-install-windows所在文件夹，输入apktool看看。会列出一些帮助的话就成功了。<br><br>### 反编译Twitter客户端<br> </p><p>运行CMD ,转入apktool文件夹运行（我的是D:apktool） </p><p>下载官方twitter的客户端 <a href="http://u.115.com/file/f3c1d017ba" target="_blank" rel="noopener">下载地址</a> &gt; </p><p>进入D:apktool&gt;              输入 apktool d twitter.apk twitter<br><br>打开<a href="http://sourceforge.net/projects/notepad-plus/" target="_blank" rel="noopener">notepad++ </a>按CTRL+F 选择文件查找选项卡 </p><p>选择目录 d:apktoolapktooltwittersmali </p><p>替换<a href="http://twitter.com/" target="_blank" rel="noopener">http://twitter.com/</a>为 api的地址 (例如:<a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">https://gtapserver1.appspot.com/)</a> </p><p>替换<a href="http://api.twitter.com/" target="_blank" rel="noopener">http://api.twitter.com/</a>为 api的地址/api/ (例如:<a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">https://gtapserver1.appspot.com/api/)</a> </p><p>替换<a href="http://search.twitter.com/" target="_blank" rel="noopener">http://search.twitter.com/</a>为 api的地址/search/ (例如:<a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">https://gtapserver1.appspot.com/</a><a href="http://yourid.appspot.com/search/" target="_blank" rel="noopener">search</a><a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">/)</a> </p><p>替换<a href="http:///" target="_blank" rel="noopener">http://www.twitter.com/</a>为 api的地址 (例如:<a href="https://gtapserver1.appspot.com/" target="_blank" rel="noopener">https://gtapserver1.appspot.com/)</a>) </p><p><a href="https://bylmgg.bay.livefilestore.com/y1mOo1c_i-NsITLMsmTs1-IvKStR75Dufpy0q-xjEMHt-XcupNZb0m7uylOpw7Au5zvC5fbtCBPMC8aA1GlKqKpLRrFA7hEqTZj696I--or2RbIuoBi753w6bVEhKZFA8S09qsxHTFR1RQ7HzZh_UFKgw/image[14].png" target="_blank" rel="noopener"><img src="http://ivanbuaa.files.wordpress.com/2010/05/image_thumb5b105d.png?w=244" alt="image" title="image"></a>  </p><p><br><br>替换后会自动保存，直接退出notepad++<br><br>CMD运行   apktool b twitter    生成的文件在D:apktooltwitterdist下<br><br>### 签名<br> </p><p>1.把修改后的APK包重命名为 unsigned.apk 放到Auto-Sign目录下 <a href="http://lvwind.net/wp-content/uploads/2010/01/Auto-sign.rar" target="_blank" rel="noopener">下载 Auto-Sign</a>（需要java环境） </p><p>auto-sian目录随意 </p><p>2.运行sign.bat签名，在同目录生成signed.apk，这就是签名后的 APK包 </p><p>搞定<br>  </p><p></p></div>
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2010/05/13/twitter-e4-b8-8a-e7-9a-84-e4-ba-ba-e7-94-9f-e5-af-bc-e5-b8-88/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2010/05/19/ubuntu-e4-bf-ae-e6-94-b9hosts/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'ivivan';
+    
+    var disqus_url = 'http://www.ivivan.com/2010/05/17/twitter-e5-ae-98-e6-96-b9-e5-ae-a2-e6-88-b7-e7-ab-af-e6-b7-bb-e5-8a-a0-e7-ac-ac-e4-b8-89-e6-96-b9api/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

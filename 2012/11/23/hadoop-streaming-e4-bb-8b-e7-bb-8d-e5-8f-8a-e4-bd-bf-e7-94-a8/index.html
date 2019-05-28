@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Hadoop Streaming介绍及使用 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it">
+  
+
+  <meta name="description" content="Hadoop MapReduce和HDFS采用Java实现，默认提供Java编程接口，另外提供了C++编程接口和Streaming框架。Streaming框架允许任何程序语言实现的程序在Hadoop MapReduce中使用，方便已有程序向Hadoop平台移植。 Streaming的原理是用Java实现一个包装用户程序的MapReduce程序，该程序负责调用MapReduce Java接口获取ke">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop Streaming介绍及使用">
+<meta property="og:url" content="http://www.ivivan.com/2012/11/23/hadoop-streaming-e4-bb-8b-e7-bb-8d-e5-8f-8a-e4-bd-bf-e7-94-a8/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="Hadoop MapReduce和HDFS采用Java实现，默认提供Java编程接口，另外提供了C++编程接口和Streaming框架。Streaming框架允许任何程序语言实现的程序在Hadoop MapReduce中使用，方便已有程序向Hadoop平台移植。 Streaming的原理是用Java实现一个包装用户程序的MapReduce程序，该程序负责调用MapReduce Java接口获取ke">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-01-06T16:53:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hadoop Streaming介绍及使用">
+<meta name="twitter:description" content="Hadoop MapReduce和HDFS采用Java实现，默认提供Java编程接口，另外提供了C++编程接口和Streaming框架。Streaming框架允许任何程序语言实现的程序在Hadoop MapReduce中使用，方便已有程序向Hadoop平台移植。 Streaming的原理是用Java实现一个包装用户程序的MapReduce程序，该程序负责调用MapReduce Java接口获取ke">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-hadoop-streaming-e4-bb-8b-e7-bb-8d-e5-8f-8a-e4-bd-bf-e7-94-a8" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Hadoop Streaming介绍及使用</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2012.11.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/国境以南/">国境以南</a> / <a class="article-category-link" href="/categories/国境以南/工作相关/">工作相关</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.ivivan.com//2012/11/23/hadoop-streaming-e4-bb-8b-e7-bb-8d-e5-8f-8a-e4-bd-bf-e7-94-a8/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>Hadoop MapReduce和HDFS采用Java实现，默认提供Java编程接口，另外提供了C++编程接口和Streaming框架。Streaming框架允许任何程序语言实现的程序在Hadoop MapReduce中使用，方便已有程序向Hadoop平台移植。</p>
+<p>Streaming的原理是用Java实现一个包装用户程序的MapReduce程序，该程序负责调用MapReduce Java接口获取key/value对输入，创建一个新的进程启动包装的用户程序，将数据通过管道传递给包装的用户程序处理，然后调用MapReduce Java接口将用户程序的输出切分成key/value对输出。如下图所示，其中Streaming Java Mapper通过管道将key/value输入传递给用户mapper程序的标准输入，并获取用户mapper程序的标准输出；Streaming Java Reducer调用Java接口通过InputFormat从HDFS获取输入数据，从管道将key/value传递给用户 reducer程序的标准输入，获取用户reducer程序的标准输出并调用Java接口通过OutputFormat输出数据；用户mapper和reducer程序负责处理数据，都从标准输入读取数据，向标准输出写入数据。</p>
+<p>Streaming有如下一些优点：&#160;<br>1)开发效率高，很多现有程序（包括脚本）能够方便的移植到hadoop平台上去运行&#160;<br>2)某些程序运行效率高，对于某些cpu密集型程序，如果map-reduce程序用C++编写，效率有可能提高&#160;<br>Streaming存在如下一些不足：&#160;<br>1) Hadoop Streaming默认只能处理文本数据。&#160;<br>2) Streaming中的mapper和reducer默认只能向标准输出写数据，不能方便地处理多路输出。&#160;<br>3) 用Java编写的MapReduce程序直接处理框架从输入数据中得到的key/value对，在Streaming中Java程序不直接处理key/value对，而是通过管道写到mapper程序的标准输入，mapper程序再从key/tvalue中解析出key/value对，这个过程多了两次数据拷贝和解析（分割），带来一定的开销。对于reducer也是一样的。</p>
+<p>streaming命令参数列表：</p>
+<p><strong>-input <em>&lt;path&gt;</em></strong></p>
+<p>输入数据路径</p>
+<p><strong>-output <em>&lt;path&gt;</em></strong></p>
+<p>输出数据路径</p>
+<p><strong>-mapper &lt;cmd|JavaClassName&gt;</strong></p>
+<p>mapper可执行程序或Java类</p>
+<p><strong>-reducer &lt;cmd|JavaClassName&gt;</strong></p>
+<p>reducer可执行程序或Java类</p>
+<p><strong>-file _&lt;file&gt; _Optional</strong></p>
+<p>分发本地文件</p>
+<p><strong>-cacheFile _&lt;file&gt; _Optional</strong></p>
+<p>分发HDFS文件</p>
+<p><strong>-cacheArchive _&lt;file&gt; _Optional</strong></p>
+<p>分发HDFS压缩文件</p>
+<p><strong>-numReduceTasks <em>&lt;num&gt;</em> Optional</strong></p>
+<p>reduce任务个数</p>
+<p><strong>-jobconf | -D NAME=VALUE Optional</strong></p>
+<p>作业配置参数</p>
+<p><strong>-combiner <em>&lt;JavaClassName&gt;</em> Optional</strong></p>
+<p>Combiner Java类</p>
+<p><strong>-partitioner <em>&lt;JavaClassName&gt;</em> Optional</strong></p>
+<p>Partitioner Java类</p>
+<p><strong>-inputformat _&lt;JavaClassName&gt;_Optional</strong></p>
+<p>InputFormat Java类</p>
+<p><strong>-outputformat _&lt;JavaClassName&gt;_Optional</strong></p>
+<p>OutputFormat Java类</p>
+<p><strong>-inputreader <em>&lt;spec&gt;</em> Optional</strong></p>
+<p>InputReader配置</p>
+<p><strong>-cmdenv <em>&lt;n&gt;=&lt;v&gt;</em> Optional</strong></p>
+<p>传给mapper和reducer的环境变量</p>
+<p><strong>-mapdebug <em>&lt;path&gt;</em> Optional</strong></p>
+<p>mapper失败时运行的debug程序</p>
+<p><strong>-reducedebug <em>&lt;path&gt;</em> Optional</strong></p>
+<p>reducer失败时运行的debug程序</p>
+<p><strong>-verbose Optional</strong></p>
+<p>详细输出模式</p>
+<p>下面是对各个参数的详细说明：</p>
+<p>-input &lt;path&gt;：指定作业输入，path可以是文件或者目录，可以使用*通配符，-input选项可以使用多次指定多个文件或目录作为输入。&#160;<br>-output &lt;path&gt;：指定作业输出目录，path必须不存在，而且执行作业的用户必须有创建该目录的权限，-output只能使用一次。&#160;<br>-mapper：指定mapper可执行程序或Java类，必须指定且唯一。&#160;<br>-reducer：指定reducer可执行程序或Java类，必须指定且唯一。&#160;<br>-file, -cacheFile, -cacheArchive：分别用于向计算节点分发本地文件、HDFS文件和HDFS压缩文件。&#160;<br>-numReduceTasks：指定reducer的个数，如果设置-numReduceTasks 0或者-reducer NONE则没有reducer程序，mapper的输出直接作为整个作业的输出。&#160;<br>-combiner：指定combiner Java类，对应的Java类文件打包成jar文件后用-file分发。&#160;<br>-partitioner：指定partitioner Java类，Streaming提供了一些实用的partitioner实现，参考_<a href="/backup/zxm/Desktop/HADOOP/%23_KeyFieldBasedPartitioner">KeyBasedFiledPartitoner</a>_和_<a href="/backup/zxm/Desktop/HADOOP/%23_IntHashPartitioner">IntHashPartitioner</a>_。&#160;<br>-inputformat, -outputformat：指定inputformat和outputformat Java类，用于读取输入数据和写入输出数据，分别要实现InputFormat和OutputFormat接口。如果不指定，默认使用TextInputFormat和TextOutputFormat。&#160;<br>-cmdenv NAME=VALUE：给mapper和reducer程序传递额外的环境变量，NAME是变量名，VALUE是变量值。&#160;<br>-mapdebug, -reducedebug：分别指定mapper和reducer程序失败时运行的debug程序。&#160;<br>-verbose：指定输出详细信息，例如分发哪些文件，实际作业配置参数值等，可以用于调试。&#160;<br>-jobconf | -D NAME=VALUE：指定作业参数，NAME是参数名，VALUE是参数值，可以指定的参数参考hadoop-default.xml。特别建议用-jobconf mapred.job.name=’My Job Name’设置作业名，使用-jobconf mapred.job.priority=VERY_HIGH | HIGH | NORMAL | LOW | VERY_LOW设置作业优先级，使用-jobconf mapred.job.map.capacity=M设置同时最多运行M个map任务，使用-jobconf mapred.job.reduce.capacity=N设置同时最多运行N个reduce任务。</p>
+<p>常见的作业配置参数如下表所示：</p>
+<p><strong><em>mapred.job.name</em></strong></p>
+<p>作业名</p>
+<p><strong><em>mapred.job.priority</em></strong></p>
+<p>作业优先级</p>
+<p><strong><em>mapred.job.map.capacity</em></strong></p>
+<p>最多同时运行map任务数</p>
+<p><strong><em>mapred.job.reduce.capacity</em></strong></p>
+<p>最多同时运行reduce任务数</p>
+<p><strong><em>hadoop.job.ugi</em></strong></p>
+<p>作业执行权限</p>
+<p><strong>mapred.map.tasks</strong></p>
+<p>map任务个数</p>
+<p><strong>mapred.reduce.tasks</strong></p>
+<p>reduce任务个数</p>
+<p><strong>mapred.job.groups</strong></p>
+<p>作业可运行的计算节点分组</p>
+<p><strong>mapred.task.timeout</strong></p>
+<p>任务没有响应（输入输出）的最大时间</p>
+<p><strong>mapred.compress.map.output</strong></p>
+<p>map的输出是否压缩</p>
+<p><strong>mapred.map.output.compression.codec</strong></p>
+<p>map的输出压缩方式</p>
+<p><strong>mapred.output.compress</strong></p>
+<p>reduce的输出是否压缩</p>
+<p><strong>mapred.output.compression.codec</strong></p>
+<p>reduce的输出压缩方式</p>
+<p><strong>stream.map.output.field.separator</strong></p>
+<p>map输出分隔符</p>
+<p>&#160;</p>
+<p>Streaming应用实例</p>
+<p>write two c++ codes</p>
+<p>1. map.cpp</p>
+<p>#include &lt;string&gt;   </p>
+<p>#include &lt;iostream&gt;</p>
+<p>using namespace std;</p>
+<p>int main()<br>{<br>string line;<br>while (cin&gt;&gt;line)<br>{<br>cout&lt;&lt;line&lt;&lt;&quot;\t&quot;&lt;&lt;1&lt;&lt;endl;<br>}<br>return 0;<br>}</p>
+<p>2. reduce.cpp</p>
+<p>#include &lt;map&gt;   </p>
+<p>#include &lt;string&gt;    </p>
+<p>#include &lt;iostream&gt;</p>
+<p>using namespace std;<br>int main()<br>{<br>string key;<br>string value;<br>map&lt;string,int&gt; word_count;<br>map&lt;string,int&gt; :: iterator it;<br>while (cin&gt;&gt;key)<br>{<br>cin&gt;&gt;value;<br>it=word_count.find(key);<br>if(it!=word_count.end())<br>{<br>++(it-&gt;second);<br>}<br>else<br>{<br>word_count.insert(make_pair(key,1));<br>}<br>}<br>for(it=word_count.begin();it!=word_count.end();++it)<br>cout&lt;&lt;it-&gt;first&lt;&lt;&quot;\t&quot;&lt;&lt;it-&gt;second&lt;&lt;endl;<br>return 0;<br>}</p>
+<p>g++ -o map map.cpp</p>
+<p>g++ -o reduce reduce.cpp</p>
+<p>2. prepare for the input files</p>
+<p>creat two txt files</p>
+<p>File1.txt：hello hadoop helloworld</p>
+<p>File2.txt：this is a firsthadoop</p>
+<p>3. start hadoop</p>
+<p>format hadoop file system</p>
+<p><code>bin`</code>/hadoop <code>namenode -</code>format`</p>
+<p>start hadoop</p>
+<p><code>bin`</code>/start-all<code></code>.sh`</p>
+<p>3. upload input files to the Hadoop file system</p>
+<p>hadoop fs –put File1.txt File2.txt&#160; ans</p>
+<p>4. set input output folders</p>
+<p>5. run the program<br>  <pre>bin/hadoop jar /usr/local/hadoop/contrib/streaming/hadoop-streaming-1.0.3.jar  </pre></p>
+<pre>-file /home/hadoop/Documents/c/hadooptest/mapper </pre>
+
+<pre>-file /home/hadoop/Documents/c/hadooptest/reduce </pre>
+
+<pre>-input /usr/local/hadoop/inputfiles/* </pre>
+
+<pre>-output /usr/local/hadoop/outputfiles</pre>
+
+<pre>-inputformat WholeFileInputFormat        (name of class)</pre>
+
+<p>inputformat 可选内置或用户自定义</p>
+<pre>-mapper /home/hadoop/Documents/c/hadooptest/mapper </pre>
+
+<pre>-reducer /home/hadoop/Documents/c/hadooptest/reduce</pre>
+
+<pre>6\. see the status</pre>
+
+<ul>
+<li>NameNode -&#160; <a href="http://localhost:50070/" target="_blank" rel="noopener">http://localhost:50070/</a></li>
+<li>JobTracker -&#160; <a href="http://localhost:50030/" target="_blank" rel="noopener">http://localhost:50030/</a></li>
+</ul>
+
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2012/11/23/e7-bb-a7-e7-bb-adhadoop-mapreduce-e6-95-b0-e6-8d-ae-e5-88-92-e5-88-86/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2012/11/23/hadoop-e8-87-aa-e5-ae-9a-e4-b9-89inputformat/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'ivivan';
+    
+    var disqus_url = 'http://www.ivivan.com/2012/11/23/hadoop-streaming-e4-bb-8b-e7-bb-8d-e5-8f-8a-e4-bd-bf-e7-94-a8/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

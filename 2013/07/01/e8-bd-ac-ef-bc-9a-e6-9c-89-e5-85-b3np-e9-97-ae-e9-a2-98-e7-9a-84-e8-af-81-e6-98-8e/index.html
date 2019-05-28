@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>转：有关NP问题的证明 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it">
+  
+
+  <meta name="description" content="总结两篇网文： 首先解释一下什么是NP问题，什么是NP hard问题，什么是NP完全问题。 看下面的图，他们之间的关系表示的比较清楚。 P Problem：这个应该最易理解，就是一个问题可以在Polynominal的时间的得到解决，当然，是对于任意input size。 NP Problem：对于一类问题，我们可能没有一个已知的快速的方法得到问题的答案，但是如果给我们一个candidate ans">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转：有关NP问题的证明">
+<meta property="og:url" content="http://www.ivivan.com/2013/07/01/e8-bd-ac-ef-bc-9a-e6-9c-89-e5-85-b3np-e9-97-ae-e9-a2-98-e7-9a-84-e8-af-81-e6-98-8e/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="总结两篇网文： 首先解释一下什么是NP问题，什么是NP hard问题，什么是NP完全问题。 看下面的图，他们之间的关系表示的比较清楚。 P Problem：这个应该最易理解，就是一个问题可以在Polynominal的时间的得到解决，当然，是对于任意input size。 NP Problem：对于一类问题，我们可能没有一个已知的快速的方法得到问题的答案，但是如果给我们一个candidate ans">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2013/07/2011040803294642_thumb.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2011/52744/2011041303003728.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2011/52744/2011041302532181.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2011/52744/2011041302532181.png">
+<meta property="og:image" content="http://pic002.cnblogs.com/images/2011/52744/2011041501324766.jpg">
+<meta property="og:updated_time" content="2017-01-06T16:53:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="转：有关NP问题的证明">
+<meta name="twitter:description" content="总结两篇网文： 首先解释一下什么是NP问题，什么是NP hard问题，什么是NP完全问题。 看下面的图，他们之间的关系表示的比较清楚。 P Problem：这个应该最易理解，就是一个问题可以在Polynominal的时间的得到解决，当然，是对于任意input size。 NP Problem：对于一类问题，我们可能没有一个已知的快速的方法得到问题的答案，但是如果给我们一个candidate ans">
+<meta name="twitter:image" content="http://ivanbuaa.files.wordpress.com/2013/07/2011040803294642_thumb.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-e8-bd-ac-ef-bc-9a-e6-9c-89-e5-85-b3np-e9-97-ae-e9-a2-98-e7-9a-84-e8-af-81-e6-98-8e" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">转：有关NP问题的证明</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2013.07.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/转载收集/">转载收集</a> / <a class="article-category-link" href="/categories/转载收集/国境以南/">国境以南</a>
+  </span>
+
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.ivivan.com//2013/07/01/e8-bd-ac-ef-bc-9a-e6-9c-89-e5-85-b3np-e9-97-ae-e9-a2-98-e7-9a-84-e8-af-81-e6-98-8e/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>总结两篇网文：</p>
+<p>首先解释一下什么是NP问题，什么是NP hard问题，什么是NP完全问题。</p>
+<p>看下面的图，他们之间的关系表示的比较清楚。</p>
+<p>P Problem：这个应该最易理解，就是一个问题可以在Polynominal的时间的得到解决，当然，是对于任意input size。</p>
+<p>NP Problem：对于一类问题，我们可能没有一个已知的快速的方法得到问题的答案，但是如果给我们一个candidate answer，我们能够在polynominal的时间内验证这个candidate answer到底是不是我们已知问题的答案，这类问题叫做NP problem。所以很显然 P Problem是NP problem的一个子集。</p>
+<p>NP-hard Problem：对于这一类问题，用一句话概括他们的特征就是“at least as hard as the hardest problems in NP Problem”， 就是NP-hard问题至少和NP问题一样难。</p>
+<p>NP-complete Problem：对于这一类问题，他们满足两个性质，一个就是在polynomial时间内可以验证一个candidate answer是不是真正的解，另一个性质就是我们可以把任何一个NP问题在polynomial的时间内把他的input转化，使之成为一个NP-complete问题。</p>
+<p>所以对于NP-hard问题，我们可以把他们分成两个部分，一部分可以用polynomial的时间验证一个candidate answer是不是真正的answer，这一部分问题组成了NP-complete集合。</p>
+<p>我们经常说的NP=P或者NP！=P，其实就是说目前而言，我们并不知道，是不是对于NP Problem集合里面的所有问题，都能够在Polynomial的时间内解决。当然只里面比较interesting的一点是，如果我们能把NP-complete集合中的任意一个问题在polynomial的时间内解决了，那么所有的NP问题都可以在polynomial的时间内解决。原因，看看上面说的NP-complete的性质就知道了，因为任何一个NP问题都可以在polynomial的时间内把他的input转化，使之成为一个NP-complete问题，所以….</p>
+<p><a href="http://ivanbuaa.files.wordpress.com/2013/07/2011040803294642.png" target="_blank" rel="noopener"><img src="http://ivanbuaa.files.wordpress.com/2013/07/2011040803294642_thumb.png" alt="2011040803294642" title="2011040803294642"></a></p>
+<p>介绍了上面说的一些定义，来举几个经典的NP-complete的问题。</p>
+<p><strong>Vertex Cover </strong><a href="http://en.wikipedia.org/wiki/Vertex_Cover" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Vertex_Cover</a></p>
+<p>Informally来说，就是对于一个图G(V,E)，我们在V中选一个subset V’， 使得E中的所有边得两点中的一个点在V’中。 所谓Vertex Cover也就是说V’中的点cover了每一条边（因为每一条边至少有一端是在V’中的啦）给你一个G(V,E)和一个k，问你在整个G中，是否存在一个大小为k的Vertex Cover（Decision Problem）</p>
+<p>Formally, a vertex cover of a graph _G_ is a set _C_ of vertices such that each edge of _G_ is incident to at least one vertex in _C_. The set _C_ is said to <em>cover</em> the edges of _G_. The following figure shows examples of vertex covers in two graphs (the set _C_ is marked with red).</p>
+<p><img src="http://pic002.cnblogs.com/images/2011/52744/2011041303003728.png" alt></p>
+<p><strong>3-CNF-SAT</strong> <a href="http://en.wikipedia.org/wiki/3SAT#3-satisfiability" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/3SAT#3-satisfiability</a></p>
+<p>举个例子，<img src="http://pic002.cnblogs.com/images/2011/52744/2011041302532181.png" alt>，每一个括号包括的东西叫一个clause，里面的X1，X2，X3在离散数学里面叫做文字，取值True或者False。每个括号之间是合取，括号里面是析取，这个问题就是，对于这样的一个表达式，是不是能找到一组Xi的值，使得表达式为True。 Given the expression, is there some assignment of <em>TRUE</em> and <em>FALSE</em> values to the variables that will make the entire expression true?</p>
+<p><strong>Integer Linear Programming&#160; </strong><a href="http://en.wikipedia.org/wiki/Linear_program#Integer_unknowns" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Linear_program#Integer_unknowns</a></p>
+<p>当然这个最显而易见了，就是LP中的所有变量都要求是整数了。关于Linear Programming的问题，后面会专门有一篇文章来讲解。O(∩_∩)O~</p>
+<p>下面来看看我们经常会遇到的一些证明问题。</p>
+<p>证明一个问题是NP问题。证明给你一个结果，你能在polynomial的时间内验证他的正确性</p>
+<p>证明一个问题是NP-hard的。对于证明一个问题是NP-hard，我们经常用到的一个technique是归约（reduction），通常用&lt;=这个符号来表示，如P&lt;=Q，这个就表示<strong>P is reducible to Q or Q is the reduction from P or P is reduced to Q. P问题可以归约到Q问题。可以把P归约到Q。</strong>这里的reduction的符号可以当成是 比较难易程度的小于等于号，意味着问题Q至少和问题P一样难。当我们要证明一个问题是NP-hard的时候，我们通常要做的是找到一个NPC问题（就用这个代替NP-complete问题），把这个NPC问题归约到NP-hard上去，即NPC&lt;=NP-hard。</p>
+<p>证明一个问题是NPC的。要证NPC，我们要分两步走，第一步证明这个问题属于NP，就是验证答案（感觉这句话我都说烂了）。第二步，证明这个问题是NP-hard的。当然这里面第二步是问题的关键，但是第一步也一定要在证明里面提到。</p>
+<p>如何证明一个问题是NP-hard 是以上证明的关键，即如何归约。</p>
+<p>这里我们归约要做的主要步骤就是，</p>
+<p>1.把NPC的input转化到NP-hard的input，即每一个NPC的input，实际上都是一个NP-hard的input。</p>
+<p>2.把NP-hard的output转化到NPC的output上来，说明给我一个NP-hard的output，我就能给你一个NPC的output。</p>
+<p>注意：以上的两个转化都要在polynomial的时间内完成。</p>
+<p>下面举几个例子来证明上面的归约的方法。</p>
+<p><strong>例 用3SAT 证明 Vertex Cover是NP-hard的。即 3SAT &lt;= Vertex Cover</strong></p>
+<p>这个就是表明我们已知3SAT这个问题是NP-complete的，如何把3SAT问题归约到Vertex Cover上。</p>
+<p>首先，我们要建立我们的通过input建立这两个问题的对应。假设我的3SAT是</p>
+<p><img src="http://pic002.cnblogs.com/images/2011/52744/2011041302532181.png" alt></p>
+<p>我们按照下面的方法构造我们的Graph，对应每一个个变量Xi，我们构造点 Xi和~Xi，对于每一个clause，我们构造3个点，这3个点直接彼此有边，假设这三个点叫A,B,C。同时我们还要建立A,B,C这三个点和该clause的联系：假设我们的clause是 （X1 V ~X2 V ~X3） 我们就把X1和A连起来，~X2和B连起来，~X3和C连起来。注意，每一个clause有一个全连通的三角，他们共用那6个变量点（X1，~X1，X2，~X2，X3，~X3） 如下图所示。</p>
+<p><img src="http://pic002.cnblogs.com/images/2011/52744/2011041501324766.jpg" alt></p>
+<p>要注意的一点是，对于E中的每一个clause，我们都对应图里面的一个三角形（也就是我用矩形圈住的那部分），同时所有的clause共享上面的六个点，也就是2*变量个数 那么多个点是共用的。</p>
+<p>通过这个图，我们也就建立起了3SAT和Vertex Cover之间的联系。通常这个也是此类证明问题中最难和最creative的部分。</p>
+<p>后面就是表述一下如何进行转换的。通常这个是很trival的部分。</p>
+<p>1）假设我有一个解能满足3SAT，那么我就一定能找到相应的解满足Veterx Cover。 如上图，3SAT满足了，必然每一个clause满足，就拿 (X1 V ~X2 V ~X3) 为例，这个式子满足了，必有一个变量为true，它可以是X1或者~X2或者~X3，假设X1为true，这时对应的vertex cover中，我们就选上面6个点中的X1，同时对于下面的三角形中的3个点，我们选除了那个与X1相连的另外两个点。对于每一个clause，我们都可以这样做，同时，我们也cover了这个图中的所有边。也就是我们有了一个满足要求的vertex cover。</p>
+<p>2）假设我有一个解能满足Vertex Cover，那么我就一定能找到相应的解满足3SAT。因为要cover这个图，所以三角形里面至少要cover两个点，上面的一对一对的pair里面也至少要cover一个，所以对于一个size为n+2m的vertex cover（n是变量个数，m是clause的个数），我们一定可以找到一个满足的3SAT，（显然啊，因为每个clause都有一个点和上面的一对一对pair的点相连） （说的好拗口，郁闷。还不清楚的可以看下这个链接 <a href="http://users.eecs.northwestern.edu/~fortnow/classes/w08/EECS395/lecture11.pdf" target="_blank" rel="noopener">http://users.eecs.northwestern.edu/~fortnow/classes/w08/EECS395/lecture11.pdf</a> ）</p>
+<p>然后，然后，。。。我们就证完了。</p>
+<p><strong>例 用3SAT证明ILP是NP-hard的。即 3SAT &lt;= ILP</strong></p>
+<p>还是首先找映射，这个映射不涉及图的东西，应该比较容易构造和理解。</p>
+<p>还是拿上面那个3SAT的例子说事。对于 每个clause，我们都对应于ILP中的一个constraint，比如 E中有4个变量，X1，X2，X3 和X4， 我们的ILP中也有同样的这4个变量，并且我们要求他们都是只能取0 或 1。对于一个clause，如(X1 V ~X2 V ~X3) ，我们对应的constraint是 “X1 + （1-X2）+（1-X3）&gt;=1”，很显然了，ILP中的变量选0对应于3SAT中的变量选false，ILP中的变量选1对应于3SAT中的变量选true，这样我们就映射好了。</p>
+<p>很显然，这两个问题的input/output的转换trival的不行了。如果一个clause满足了，对应的那个ILP中的constraint肯定也满足了；反之依然。偷个懒~O(∩_∩)O~</p>
+<p>证毕。</p>
+<p>基本方法：</p>
+<p>标准办法是从一个已知的NP问题推导出这个问题，而这个推导的复杂程度是Polynomial的。</p>
+<p>这可以用反证法来证明：</p>
+<p>已知问题A是NP问题，而且经过一番推导可以得出问题B，而这个推导是Polynomial的。假设问题B是P，即存在Polynomial(O(n^c))算法可以解决问题B，那么我们就可以先把问题A转化为问题B，再解决问题B。因为这两个步骤都是Polynomial的，也就是说我们发现了Polynomial的算法解决问题A。而这与已知问题A是NP问题矛盾。所以我们的假定是错的，问题B一定也是NP问题。</p>
+
+    
+  </div>
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2013/06/30/live-long-and-prosper/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2013/07/04/e4-bb-8a-e6-99-9a-e6-9c-88-e8-89-b2-e7-9c-9f-e7-be-8e/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'ivivan';
+    
+    var disqus_url = 'http://www.ivivan.com/2013/07/01/e8-bd-ac-ef-bc-9a-e6-9c-89-e5-85-b3np-e9-97-ae-e9-a2-98-e7-9a-84-e8-af-81-e6-98-8e/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//ivivan.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
