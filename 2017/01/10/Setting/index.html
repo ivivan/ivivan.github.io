@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-amazon">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Amazon_EMR_SSH_Setting | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="work,">
+  
+
+  <meta name="description" content="Amazon EMR SSH SettingTips: When creating cluster, the following rules have to add full access to EMR: ElasticMapReduce:*  the EC2 instance profile EMR role:EMR_DefaultRole Auto Scaling role:   Rememb">
+<meta name="keywords" content="work">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Amazon_EMR_SSH_Setting">
+<meta property="og:url" content="http://www.ivivan.com/2017/01/10/Setting/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="Amazon EMR SSH SettingTips: When creating cluster, the following rules have to add full access to EMR: ElasticMapReduce:*  the EC2 instance profile EMR role:EMR_DefaultRole Auto Scaling role:   Rememb">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-03-20T12:43:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Amazon_EMR_SSH_Setting">
+<meta name="twitter:description" content="Amazon EMR SSH SettingTips: When creating cluster, the following rules have to add full access to EMR: ElasticMapReduce:*  the EC2 instance profile EMR role:EMR_DefaultRole Auto Scaling role:   Rememb">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Amazon-EMR-SSH-Setting"><span class="toc-text">Amazon EMR SSH Setting</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Tips"><span class="toc-text">Tips:</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="amazon-Setting" class="article article-type-amazon" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Amazon_EMR_SSH_Setting</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.01.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="Amazon-EMR-SSH-Setting"><a href="#Amazon-EMR-SSH-Setting" class="headerlink" title="Amazon EMR SSH Setting"></a>Amazon EMR SSH Setting</h1><h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips:"></a>Tips:</h2><ol>
+<li><p>When creating cluster, the following rules have to add full access to EMR: ElasticMapReduce:*</p>
+<ul>
+<li>the EC2 instance profile</li>
+<li>EMR role:EMR_DefaultRole</li>
+<li>Auto Scaling role:</li>
+</ul>
+</li>
+<li><p>Remember to generate a prirate key for ssh connection.</p>
+</li>
+<li><p>For SSH connection:</p>
+<ul>
+<li><p>In security group, Each group, Inbound/Edit, add ssh</p>
+</li>
+<li><p>SSH connection to the master node is simple, following the steps shown on the pages.</p>
+</li>
+<li><p>SSH for the webinterfaces:</p>
+</li>
+<li><p>For windows:</p>
+<ul>
+<li><p>Links Option 2 <a href="http://docs.aws.amazon.com//emr/latest/ManagementGuide/emr-ssh-tunnel.html" target="_blank" rel="noopener">Links Option 2</a></p>
+</li>
+<li><p>use puttygen convert the private key, save as private key</p>
+</li>
+<li><p>Need a Chrome Extention, search <strong>FoxyProxy</strong> and install standard version</p>
+</li>
+<li>follow the link <a href="http://docs.aws.amazon.com//emr/latest/ManagementGuide/emr-connect-master-node-proxy.html" target="_blank" rel="noopener">Option2Part2</a></li>
+</ul>
+</li>
+<li><p>For Linux still has some problems</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>Test and it works good.</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/05/30/Mr-Van-Gogh/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-amazon">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

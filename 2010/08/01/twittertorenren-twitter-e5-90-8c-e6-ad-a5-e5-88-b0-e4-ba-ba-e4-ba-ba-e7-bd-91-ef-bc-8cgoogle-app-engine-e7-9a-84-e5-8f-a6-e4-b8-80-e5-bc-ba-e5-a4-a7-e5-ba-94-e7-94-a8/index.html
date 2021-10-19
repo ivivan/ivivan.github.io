@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>twittertorenren, twitter同步到人人网，Google app Engine的另一强大应用 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it">
+  
+
+  <meta name="description" content="web2.0的时代，没有什么能阻止信息的流通，解决一切障碍也只是时间问题……….以前因为觉得google app engine和python麻烦，错过了很多好应用，自从前几日耐不住寂寞搭了个twitter的api后，今天把很久前google reader里标星的一篇有关twitter同步人人网的文翻出来，实验一下，效果良好，记录如下：1. 相关下载，要求与之前写的搭api一文中相同，不再赘述2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="twittertorenren, twitter同步到人人网，Google app Engine的另一强大应用">
+<meta property="og:url" content="http://www.ivivan.com/2010/08/01/twittertorenren-twitter-e5-90-8c-e6-ad-a5-e5-88-b0-e4-ba-ba-e4-ba-ba-e7-bd-91-ef-bc-8cgoogle-app-engine-e7-9a-84-e5-8f-a6-e4-b8-80-e5-bc-ba-e5-a4-a7-e5-ba-94-e7-94-a8/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="web2.0的时代，没有什么能阻止信息的流通，解决一切障碍也只是时间问题……….以前因为觉得google app engine和python麻烦，错过了很多好应用，自从前几日耐不住寂寞搭了个twitter的api后，今天把很久前google reader里标星的一篇有关twitter同步人人网的文翻出来，实验一下，效果良好，记录如下：1. 相关下载，要求与之前写的搭api一文中相同，不再赘述2.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2010/08/e4b88be8bdbd_thumb5b15d.jpg?w=94">
+<meta property="og:image" content="https://bylmgg.bay.livefilestore.com/y1mM4kc-g6udHelcZN5KDvuV3w1BlfTiwXSb3mxI2p8KHMG37Kc1Lnp0wYFn07Tza8oomkT42PKdpCZ6-LJ4s5qDexKTqxcpM0zykQUMmfawZzB4Rz-aAtvRtuiEg0zJO8CCYT1HD4Jp5XoMQLd0gc8bA/image_thumb[3] 049ED756.png?download&psid=1">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2010/08/e4b88be8bdbd28129_thumb5b15d.jpg?w=300">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2010/08/e4b88be8bdbd28229_thumb5b15d.jpg?w=300">
+<meta property="og:updated_time" content="2017-01-06T16:53:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="twittertorenren, twitter同步到人人网，Google app Engine的另一强大应用">
+<meta name="twitter:description" content="web2.0的时代，没有什么能阻止信息的流通，解决一切障碍也只是时间问题……….以前因为觉得google app engine和python麻烦，错过了很多好应用，自从前几日耐不住寂寞搭了个twitter的api后，今天把很久前google reader里标星的一篇有关twitter同步人人网的文翻出来，实验一下，效果良好，记录如下：1. 相关下载，要求与之前写的搭api一文中相同，不再赘述2.">
+<meta name="twitter:image" content="http://ivanbuaa.files.wordpress.com/2010/08/e4b88be8bdbd_thumb5b15d.jpg?w=94">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-twittertorenren-twitter-e5-90-8c-e6-ad-a5-e5-88-b0-e4-ba-ba-e4-ba-ba-e7-bd-91-ef-bc-8cgoogle-app-engine-e7-9a-84-e5-8f-a6-e4-b8-80-e5-bc-ba-e5-a4-a7-e5-ba-94-e7-94-a8" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">twittertorenren, twitter同步到人人网，Google app Engine的另一强大应用</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2010.08.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/工作相关/">工作相关</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <div id="msgcns!1326AB98D6395CF4!1899" class="bvMsg"><br><br>web2.0的时代，没有什么能阻止信息的流通，解决一切障碍也只是时间问题……….<br><br>以前因为觉得google app engine和python麻烦，错过了很多好应用，自从前几日耐不住寂寞搭了个twitter的api后，今天把很久前google reader里标星的一篇有关twitter同步人人网的文翻出来，实验一下，效果良好，记录如下：<br><br>1. 相关下载，要求与之前写的搭api一文中相同，不再赘述<br><br>2. 从Google app Engine里建一个新应用，方便说明，地址假定abc，其它照旧随便。这里发现原来Google app Engine只是在开通的时候要短信验证，以后建应用就不用了。而且不是传说中的只有三个，是可以建十个。<br><br>3. 下载以下三个文件，在google_appengine文件夹下新建一个文件夹renren放入，名不要改。不知道google_appengine在哪的继续复习前文<br><br>详述：<br><br>1. <strong>脚本文件twitter2renren.py：下载地址：<a href="http://goo.gl/K5OI" title="http://goo.gl/K5OI" target="_blank" rel="noopener">http://goo.gl/K5OI</a></strong><br><br><a href="https://bylmgg.bay.livefilestore.com/y1m4jRq3E2yQmEjIireCtLdWbDhxBREQxR-21H-7lsvjKIm5AWV5232rrj9KcQWmI0IATbEyo0SsNfvNREHI5k9ob8EEIbE-KFDxOgrL2a2MuIcLvetT4m0l0hW7hUk4lJqkpGrLs9QIcBgsI7FXR4zyA/%E4%B8%8B%E8%BD%BD[3].jpg?download&amp;psid=1" target="_blank" rel="noopener"><img src="http://ivanbuaa.files.wordpress.com/2010/08/e4b88be8bdbd_thumb5b15d.jpg?w=94" alt="下载" title="下载"></a><br><br>打开twitter2renren.py，按其中提示的部分进行修改，其它地方不用管。<br><br>其中第17，18两行解释一下：如下图所示，在twitter上发的每一条推都有一个独一无二的编号，注意地址栏里的数字20054753629，自己看一下，选一个填上，如果看不懂，也可以不动，不影响，只不过会第一次大量的同步可能会有刷屏效果而已，也有说最多只会同步十条，没试。<br><br><a href="https://bylmgg.bay.livefilestore.com/y1mixWA4_du9wkyfKxP-65diPqQaSdQy2OoYzH-fW9d2AxueEPyR655XfXKjf9tVn7u0x2jZHIbSAgzB1ut1eRx4BeR9RAPh0gMfwTb_IK4dZbh5W1QiJQV5fgbtX6ppvXL6_8FsrL86tG--rgvhEgnIQ/image[5] 33F10E87.png?download&amp;psid=1" target="_blank" rel="noopener"><img src="https://bylmgg.bay.livefilestore.com/y1mM4kc-g6udHelcZN5KDvuV3w1BlfTiwXSb3mxI2p8KHMG37Kc1Lnp0wYFn07Tza8oomkT42PKdpCZ6-LJ4s5qDexKTqxcpM0zykQUMmfawZzB4Rz-aAtvRtuiEg0zJO8CCYT1HD4Jp5XoMQLd0gc8bA/image_thumb[3] 049ED756.png?download&amp;psid=1" alt="image" title="image"></a><br><br>修改完后保存即可。<br><br>2. <strong>配置文件cron.yaml，每5分钟触发一次： 下载地址：<a href="http://goo.gl/gRf9" title="http://goo.gl/gRf9" target="_blank" rel="noopener">http://goo.gl/gRf9</a></strong><br><br><a href="https://bylmgg.bay.livefilestore.com/y1mOiPdz9bZcKT4VPZzvY3Wa4UuQh_oyPJcZ8ZDGKCemvZYG4h0bVT1L5GUvnpouHaQdCmK-1Ewf9ynT9DEpzH3jmhxiyu3oiV16J6UXes2xLqF2y62ioqTZ0A46r_XiRiuLPM_waECsHD_w5jcxMx0jQ/%E4%B8%8B%E8%BD%BD (1" target="_blank" rel="noopener"><img src="http://ivanbuaa.files.wordpress.com/2010/08/e4b88be8bdbd28129_thumb5b15d.jpg?w=300" alt="下载 (1)" title="下载 (1)"></a>[3].jpg?download&amp;psid=1)<br><br>此文件完全不用修改，如果想的话可以动一下触发时间<br><br>3. <strong>配置文件app.yaml，限制只有管理员才能访问/twitter2renren：下载地址：<a href="http://goo.gl/bzvs" title="http://goo.gl/bzvs" target="_blank" rel="noopener">http://goo.gl/bzvs</a></strong><br><br><a href="https://bylmgg.bay.livefilestore.com/y1mx7e-2DFCdnjg_aCO2knt-kZFxmhyYHAGg2kHp6kdVp7OzMxn_0Re28LHApsly6uNEqqOBEUQHXU_meFhAptBaNxKIGhB55GkIuKz_NqsnIfAS4rIajXTeZdxa_SzjyCNF4iwjd7d-FDzOsJWXzT-yA/%E4%B8%8B%E8%BD%BD (2" target="_blank" rel="noopener"><img src="http://ivanbuaa.files.wordpress.com/2010/08/e4b88be8bdbd28229_thumb5b15d.jpg?w=300" alt="下载 (2)" title="下载 (2)"></a>[3].jpg?download&amp;psid=1)<br><br>把第一行改成自己建的app名，其实应该是那个地址名，也就是abc<br><br>其它不用管<br><br>4.以上三个文件修改后，运行cmd,进入google_appengine目录<br><br>执行上传命令，与上篇文一样   appcfg.py update renren<br><br>过程中输入google账号和密码，等待，自动完成<br><br>5. 结束，可去google app engine控制台看一下运行情况，不出意外，很快人人网的同步消息就到了<br><br><strong><font size="3">注意事项及重要补充说明：</font></strong><br><br>1. 避免使用“记事本/notepad“编辑twitter2renren.py。起码去下个notepad++再来混，这是素质问题<br><br>2. 允许同步以&quot;@&quot;开头的tweet：注释掉第46行，同时将第47行的缩进减小一格。<br><br>python的注释用#放在句首就可以，别太业余<br><br>3.取消同步retweet：注释掉第38, 39, 42, 43, 48, 49行。<br><br>4.cron脚本是负责自动同步的。login: admin的作用是防止手动刷新<br><br>5.人人网是有自。动。审。查。的，所以遗失某些推的话不要声张，低调<br><br>6.三个文件我存到skydriver了，如下不了去那下，不过这种可能性很小<br><br><font size="5">最重要的是第7条：</font><br><br>7.人人网是存在于天朝的优秀社交网站，twitter这个鸟网是不存在的，因此，这其实是篇科幻小说，一切都是假象…………<br>  </div>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2010/08/01/e7-94-b1-e7-bd-91-e6-98-93-e6-8a-9b-e7-a0-96-e8-80-8c-e5-bc-95-e5-87-ba-e7-9a-84-e6-83-8a-e4-b8-96-e5-a5-87-e6-96-87-ef-bc-8c-e6-8b-9c-e5-80-92-e2-80-a6-e2-80-a6-e2-80-a6/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2010/08/04/e5-87-a1-e5-ae-a2-e8-af-9a-e5-93-81-ef-bc-8c-e8-af-b7-e5-8f-ab-e6-88-91-3-5-e5-8f-b7-e6-8a-95-e6-89-8b-e2-80-a6-e2-80-a6-e2-80-a6-e2-80-a6/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

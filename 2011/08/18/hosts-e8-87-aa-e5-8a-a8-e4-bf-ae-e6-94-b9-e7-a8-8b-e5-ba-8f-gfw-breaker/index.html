@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>hosts自动修改程序-GFW breaker | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it">
+  
+
+  <meta name="description" content="一直知道最简单的翻墙方式就是修改hosts，但总是担心可用的IP地址不知哪天又失效，还要换来换去麻烦的很，后来一度靠着免费的VPN和SSH账号度日。不过近几个月来天朝打击力度明显加大，几个存活很久的SSH账号都被搞掉，恰好看到一文介绍GFW breaker这么个自动更新hosts的工具，下来试用效果不错，可以继续持有~ 程序下载地址：http://u.115.com/file/bhd0vqnt包括">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hosts自动修改程序-GFW breaker">
+<meta property="og:url" content="http://www.ivivan.com/2011/08/18/hosts-e8-87-aa-e5-8a-a8-e4-bf-ae-e6-94-b9-e7-a8-8b-e5-ba-8f-gfw-breaker/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="一直知道最简单的翻墙方式就是修改hosts，但总是担心可用的IP地址不知哪天又失效，还要换来换去麻烦的很，后来一度靠着免费的VPN和SSH账号度日。不过近几个月来天朝打击力度明显加大，几个存活很久的SSH账号都被搞掉，恰好看到一文介绍GFW breaker这么个自动更新hosts的工具，下来试用效果不错，可以继续持有~ 程序下载地址：http://u.115.com/file/bhd0vqnt包括">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-01-06T16:53:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hosts自动修改程序-GFW breaker">
+<meta name="twitter:description" content="一直知道最简单的翻墙方式就是修改hosts，但总是担心可用的IP地址不知哪天又失效，还要换来换去麻烦的很，后来一度靠着免费的VPN和SSH账号度日。不过近几个月来天朝打击力度明显加大，几个存活很久的SSH账号都被搞掉，恰好看到一文介绍GFW breaker这么个自动更新hosts的工具，下来试用效果不错，可以继续持有~ 程序下载地址：http://u.115.com/file/bhd0vqnt包括">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-hosts-e8-87-aa-e5-8a-a8-e4-bf-ae-e6-94-b9-e7-a8-8b-e5-ba-8f-gfw-breaker" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">hosts自动修改程序-GFW breaker</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2011.08.18</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/工作相关/">工作相关</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>一直知道最简单的翻墙方式就是修改hosts，但总是担心可用的IP地址不知哪天又失效，还要换来换去麻烦的很，后来一度靠着免费的VPN和SSH账号度日。不过近几个月来天朝打击力度明显加大，几个存活很久的SSH账号都被搞掉，恰好看到一文介绍GFW breaker这么个自动更新hosts的工具，下来试用效果不错，可以继续持有~</p>
+<p>程序下载地址：<a href="http://u.115.com/file/bhd0vqnt" target="_blank" rel="noopener">http://u.115.com/file/bhd0vqnt</a><br>包括程序和已经生成好的hosts，方便Linux和Mac的用户）（江民、瑞星、金山会误报，其它杀软没问题，担心文件安全的可以下载下面的脚本程序<br>脚本版下载地址（共三个文件）：<a href="http://u.115.com/file/aq7a1lq4" target="_blank" rel="noopener">http://u.115.com/file/aq7a1lq4</a></p>
+<p>WIN7下运行过程会出现找不到路径，这个是正常现象，Winxp没有这问题</p>
+<p>正常运行的时候会生成两个文件，HTTP下载工具-wget.exe，hosts脚本-fgqi.bat<br>对文件安全有疑问的可以看最后的说明</p>
+<p>功能：自动更新批处理脚本，用本机获取的Google北京服务器生成hosts的地址。<br>自动识别原hosts里面的地址，自动进行更新，不影响你添加的其它地址。</p>
+<p>文件说明：<br>包含文件：wget.exe（因为自带没有http下载的工具，所以要捆绑这个下载小工具）<br>xiazai.bat （程序的代码包括运行wget下载新的脚本，运行脚本，以及最<br>后的删掉临时生成的文件，并退出）<br>fgqi.bat （会通过wget下载下来，里面包括自动更新hosts的脚本）<br>在线37个杀毒软件查杀结果：<a href="http://r.virscan.org/e659c2abd42b9144aedaf242bd168173" target="_blank" rel="noopener">http://r.virscan.org/e659c2abd42b9144aedaf242bd168173</a><br>因为程序会下载一个脚本并运行，所以（江民、金山会误报说有木马下载代码，瑞星报是可以和程序，F-Prot报W32/Agent.JL.gen!Eldorado，其它33个杀软没问题）</p>
+<p>我用程序版，XP系统，一切正常可用。用修改IP地址的最大好处就是解决不用浏览器用其它程序直接连接被墙网址的情况，当然也可用VPN，但还有个墙与不墙的识别问题，还是这样来得效率一些~</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2011/08/13/yes-or-no/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2011/08/18/e7-a8-8b-e5-ba-8f-e5-91-98-e8-a3-85-e9-80-bc-e6-8c-87-e5-8d-97-e8-bd-ac/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

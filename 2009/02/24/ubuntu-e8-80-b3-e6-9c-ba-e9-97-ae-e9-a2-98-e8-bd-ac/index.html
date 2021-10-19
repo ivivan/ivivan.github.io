@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>ubuntu 耳机问题 转 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it">
+  
+
+  <meta name="description" content="我的笔记本声卡AL880，音响是正常的，但是插上耳机之后耳机没声音（耳机是好的），而且音量控制里面没有headphone的选项。相信论坛上很多朋友都遇到了类似的问题。我经过一番折腾，终于找到了解决的办法，如果想直接看方法，可以跳过前面直接看后面的红字部分按照这个帖子9楼的回复http://forum.ubuntu.org.cn/viewtopic.php?f=126&amp;amp;t=163400引用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu 耳机问题 转">
+<meta property="og:url" content="http://www.ivivan.com/2009/02/24/ubuntu-e8-80-b3-e6-9c-ba-e9-97-ae-e9-a2-98-e8-bd-ac/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="我的笔记本声卡AL880，音响是正常的，但是插上耳机之后耳机没声音（耳机是好的），而且音量控制里面没有headphone的选项。相信论坛上很多朋友都遇到了类似的问题。我经过一番折腾，终于找到了解决的办法，如果想直接看方法，可以跳过前面直接看后面的红字部分按照这个帖子9楼的回复http://forum.ubuntu.org.cn/viewtopic.php?f=126&amp;amp;t=163400引用">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-01-06T16:53:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu 耳机问题 转">
+<meta name="twitter:description" content="我的笔记本声卡AL880，音响是正常的，但是插上耳机之后耳机没声音（耳机是好的），而且音量控制里面没有headphone的选项。相信论坛上很多朋友都遇到了类似的问题。我经过一番折腾，终于找到了解决的办法，如果想直接看方法，可以跳过前面直接看后面的红字部分按照这个帖子9楼的回复http://forum.ubuntu.org.cn/viewtopic.php?f=126&amp;amp;t=163400引用">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-ubuntu-e8-80-b3-e6-9c-ba-e9-97-ae-e9-a2-98-e8-bd-ac" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">ubuntu 耳机问题 转</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2009.02.24</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/工作相关/">工作相关</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <div id="msgcns!1326AB98D6395CF4!248" class="bvMsg"> 我的笔记本声卡AL880，音响是正常的，但是插上耳机之后耳机没声音（耳机是好的），而且音量控制里面没有headphone的选项。相信论坛上很多朋友都遇到了类似的问题。<br><br>我经过一番折腾，终于找到了解决的办法，如果想直接看方法，可以跳过前面直接看后面的<span style="color:rgb(255,0,0);">红字部分</span><br><br>按照这个帖子9楼的回复<br><a href="http://forum.ubuntu.org.cn/viewtopic.php?f=126&amp;t=163400" target="_blank" rel="noopener">http://forum.ubuntu.org.cn/viewtopic.php?f=126&amp;t=163400</a><br><br><div><strong>引用:</strong></div><div>我这有解决方法 我也是这个问题 用这个方法解决了 你可以试试看：<br><br>打开/etc/modprobe.d目录，编辑下面的aliases文件，将上面以alias开头的行加入其中<br>代码:<br># ALSA portion<br>alias char-major-116 snd<br>alias snd-card-0 snd-hda-intel<br>options snd-hda-intel model=z71v position_fix=1<br><br># OSS/Free portion<br>alias char-major-14 soundcore<br>alias sound-slot-0 snd-card-0<br><br># card #1<br>alias sound-service-0-0 snd-mixer-oss<br>alias sound-service-0-1 snd-seq-oss<br>alias sound-service-0-3 snd-pcm-oss<br>alias sound-service-0-8 snd-seq-oss<br>alias sound-service-0-12 snd-pcm-oss<br><br>然后重新启动，打开alsamixer看一下，应该有headphone这一项了。<br></div>
+
+<p>照着这个做，耳机有声音了，而且选项卡里有headphone的选项了。但是有一个问题就是启动的时候要读一大堆东西，而且非常非常慢……</p>
+<p>后来经过一番google，终于找到更详细的解决方法。帖子在这里：<br><a href="http://www.blog.edu.cn/user3/HareCat/archives/2006/1532728.shtml" target="_blank" rel="noopener">http://www.blog.edu.cn/user3/HareCat/archives/2006/1532728.shtml</a></p>
+<div><strong>引用:</strong></div><div>参考<a href="http://www.fedoraforum.org/forum/showthread.php?t=109654" target="_blank" rel="noopener">http://www.fedoraforum.org/forum/showthread.php?t=109654</a><br><br>我<br>的ASUS A6000V上用的是这一款声卡，在安装linux的过程中，内核会将其自动识别为Intel HD<br>Audio，安装之后，出现的问题是外放能出声，但插上耳机却没有声音，在音量调节中（不管是alsa<br>mixer还是gmixer还是kmix其它的）也没有Headphone这一项。<br><br>如果你的/etc/目录下有modprobe.conf或者modules.conf或者conf.modules，那么只要将其中有关声卡的部分用#注释掉，然后加入以下内容：<br><br># ALSA portion<br>alias char-major-116 snd<br>alias snd-card-0 snd-hda-intel<br>options snd-hda-intel model=z71v position_fix=1<br><br># OSS/Free portion<br>alias char-major-14 soundcore<br>alias sound-slot-0 snd-card-0<br><br># card #1<br>alias sound-service-0-0 snd-mixer-oss<br>alias sound-service-0-1 snd-seq-oss<br>alias sound-service-0-3 snd-pcm-oss<br>alias sound-service-0-8 snd-seq-oss<br>alias sound-service-0-12 snd-pcm-oss<br><br>然后重新启动，打开alsamixer看一下，应该有headphone这一项了。<br><br>如果你用的是Ubuntu，在/etc/目录下找不到那些文件，这时候需要打开/etc/modprobe.d目录，编辑下面的aliases文件，将上面以alias开头的行加入其中，同时将<br>       options snd-hda-intel model=z71v position_fix=1<br>加到/etc/modprobe.d/options里，然后重启，这样耳机应该能够使用了。</div>
+
+<p><span style="color:rgb(255,0,0);">下面是我总结的ubuntu8.04里笔记本音响正常，耳机没声音的解决办法。</span></p>
+<p>1.运行</p>
+<div><strong>代码:</strong></div><div>sudo gedit /etc/modprobe.d/aliases</div><br>把# character devices 那部分下面的以alias char-major开头的每一行都用＃注释掉。然后在后面加入下面的代码，最后保存。<br># ALSA portion<br>alias char-major-116 snd<br>alias snd-card-0 snd-hda-intel<br>options snd-hda-intel model=z71v position_fix=1<br><br># OSS/Free portion<br>alias char-major-14 soundcore<br>alias sound-slot-0 snd-card-0<br><br># card #1<br>alias sound-service-0-0 snd-mixer-oss<br>alias sound-service-0-1 snd-seq-oss<br>alias sound-service-0-3 snd-pcm-oss<br>alias sound-service-0-8 snd-seq-oss<br>alias sound-service-0-12 snd-pcm-oss<br><br>基本上做完这个就算是完成了，但是这样的话启动的时候会非常之慢，而且在你调出音量控制器，以及用mplayer打开视频文件的时候，也要有一个比较长的读取过程。所以，为了优化速度，可以做第2步。<br><br>2.运行<br><div><strong>代码:</strong></div><div>sudo gedit /etc/modprobe.d/options</div><br>在其中加入<br>options snd-hda-intel model=z71v position_fix=1<br>保存，退出。<br><br>这样，就成功的解决了笔记本在ubuntu8.04下（估计8.10方法类似）耳机不出声的问题了。<br><br>我之所以在前面引用那么多别人的方法主要是尊重别人的劳动成果，别嫌我罗嗦阿，呵呵。<br><br>另外，小提示，用mplayer看电影的时候，如果没有声音，只要在preferences里audio选项里选择oss或alsa，选应用，就会有声音</div>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2009/02/21/ubuntu-e7-bb-88-e7-ab-af-e5-91-bd-e4-bb-a4-e9-9b-86/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2009/02/27/ubuntu-e5-bd-b1-e9-9f-b3-e8-ae-be-e7-bd-ae/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
