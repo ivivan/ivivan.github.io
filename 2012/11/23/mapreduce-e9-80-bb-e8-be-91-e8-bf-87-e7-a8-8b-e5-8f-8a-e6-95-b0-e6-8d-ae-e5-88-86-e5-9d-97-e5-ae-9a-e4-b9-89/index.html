@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>MapReduce逻辑过程及数据分块定义 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it" />
+  
+
+  <meta name="description" content="Map-Reduce的逻辑过程假设我们需要处理一批有关天气的数据，其格式如下：  按照ASCII码存储，每行一条记录*   每一行字符从0开始计数，第15个到第18个字符为年*   第25个到第29个字符为温度，其中第25位是符号+&#x2F;-  0067011990999991950051507**+0000**+ 0043011990999991950051512**+0022**+ 004">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MapReduce逻辑过程及数据分块定义">
+<meta property="og:url" content="http://www.ivivan.com/2012/11/23/mapreduce-e9-80-bb-e8-be-91-e8-bf-87-e7-a8-8b-e5-8f-8a-e6-95-b0-e6-8d-ae-e5-88-86-e5-9d-97-e5-ae-9a-e4-b9-89/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="Map-Reduce的逻辑过程假设我们需要处理一批有关天气的数据，其格式如下：  按照ASCII码存储，每行一条记录*   每一行字符从0开始计数，第15个到第18个字符为年*   第25个到第29个字符为温度，其中第25位是符号+&#x2F;-  0067011990999991950051507**+0000**+ 0043011990999991950051512**+0022**+ 004">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2012/11/image1.png">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2012/11/image2.png">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2012/11/image3.png">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2012/11/image4.png">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2012/11/image1_thumb.jpg">
+<meta property="article:published_time" content="2012-11-23T21:38:00.000Z">
+<meta property="article:modified_time" content="2022-12-21T11:28:01.341Z">
+<meta property="article:author" content="Ivan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ivanbuaa.files.wordpress.com/2012/11/image1.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Map-Reduce%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%87%E7%A8%8B"><span class="toc-text">Map-Reduce的逻辑过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%BC%96%E5%86%99Map-Reduce%E7%A8%8B%E5%BA%8F"><span class="toc-text">2、编写Map-Reduce程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Map-Reduce%E6%95%B0%E6%8D%AE%E6%B5%81-data-flow"><span class="toc-text">3、Map-Reduce数据流(data flow)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1%E3%80%81%E4%BB%BB%E5%8A%A1%E6%8F%90%E4%BA%A4"><span class="toc-text">3.1、任务提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2%E3%80%81%E4%BB%BB%E5%8A%A1%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">3.2、任务初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3%E3%80%81%E4%BB%BB%E5%8A%A1%E5%88%86%E9%85%8D"><span class="toc-text">3.3、任务分配</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4%E3%80%81%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C"><span class="toc-text">3.4、任务执行</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-1%E3%80%81Map%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">3.4.1、Map的过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-4-2%E3%80%81Reduce%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-text">3.4.2、Reduce的过程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5%E3%80%81%E4%BB%BB%E5%8A%A1%E7%BB%93%E6%9D%9F"><span class="toc-text">3.5、任务结束</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-mapreduce-e9-80-bb-e8-be-91-e8-bf-87-e7-a8-8b-e5-8f-8a-e6-95-b0-e6-8d-ae-e5-88-86-e5-9d-97-e5-ae-9a-e4-b9-89" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">MapReduce逻辑过程及数据分块定义</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2012.11.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%9B%BD%E5%A2%83%E4%BB%A5%E5%8D%97/">国境以南</a> / <a class="article-category-link" href="/categories/%E5%9B%BD%E5%A2%83%E4%BB%A5%E5%8D%97/%E5%B7%A5%E4%BD%9C%E7%9B%B8%E5%85%B3/">工作相关</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h3 id="Map-Reduce的逻辑过程"><a href="#Map-Reduce的逻辑过程" class="headerlink" title="Map-Reduce的逻辑过程"></a>Map-Reduce的逻辑过程</h3><p>假设我们需要处理一批有关天气的数据，其格式如下：</p>
+<ul>
+<li>按照ASCII码存储，每行一条记录*   每一行字符从0开始计数，第15个到第18个字符为年*   第25个到第29个字符为温度，其中第25位是符号+&#x2F;-</li>
+</ul>
+<p>006701199099999<strong>1950</strong>051507**+0000**+</p>
+<p>004301199099999<strong>1950</strong>051512**+0022**+</p>
+<p>004301199099999<strong>1950</strong>051518**-0011**+</p>
+<p>004301265099999<strong>1949</strong>032412**+0111**+</p>
+<p>004301265099999<strong>1949</strong>032418**+0078**+</p>
+<p>006701199099999<strong>1937</strong>051507**+0001**+</p>
+<p>004301199099999<strong>1937</strong>051512**-0002**+</p>
+<p>004301199099999<strong>1945</strong>051518**+0001**+</p>
+<p>004301265099999<strong>1945</strong>032412**+0002**+</p>
+<p>004301265099999<strong>1945</strong>032418**+0078**+</p>
+<p>现在需要统计出每年的最高温度。</p>
+<p>Map-Reduce主要包括两个步骤：Map和Reduce</p>
+<p>每一步都有key-value对作为输入和输出：</p>
+<ul>
+<li>map阶段的key-value对的格式是由输入的格式所决定的，如果是默认的TextInputFormat，则每行作为一个记录进程处理，其中key为此行的开头相对于文件的起始位置，value就是此行的字符文本*   map阶段的输出的key-value对的格式必须同reduce阶段的输入key-value对的格式相对应</li>
+</ul>
+<p>对于上面的例子，在map过程，输入的key-value对如下：</p>
+<p>(0, 006701199099999<strong>1950</strong>051507**+0000**+)</p>
+<p>(33, 004301199099999<strong>1950</strong>051512**+0022**+)</p>
+<p>(66, 004301199099999<strong>1950</strong>051518**-0011**+)</p>
+<p>(99, 004301265099999<strong>1949</strong>032412**+0111**+)</p>
+<p>(132, 004301265099999<strong>1949</strong>032418**+0078**+)</p>
+<p>(165, 006701199099999<strong>1937</strong>051507**+0001**+)</p>
+<p>(198, 004301199099999<strong>1937</strong>051512**-0002**+)</p>
+<p>(231, 004301199099999<strong>1945</strong>051518**+0001**+)</p>
+<p>(264, 004301265099999<strong>1945</strong>032412**+0002**+)</p>
+<p>(297, 004301265099999<strong>1945</strong>032418**+0078**+)</p>
+<p>在map过程中，通过对每一行字符串的解析，得到年-温度的key-value对作为输出：</p>
+<p>(1950, 0)</p>
+<p>(1950, 22)</p>
+<p>(1950, -11)</p>
+<p>(1949, 111)</p>
+<p>(1949, 78)</p>
+<p>(1937, 1)</p>
+<p>(1937, -2)</p>
+<p>(1945, 1)</p>
+<p>(1945, 2)</p>
+<p>(1945, 78)</p>
+<p>在reduce过程，将map过程中的输出，按照相同的key将value放到同一个列表中作为reduce的输入</p>
+<p>(1950, [0, 22, –11])</p>
+<p>(1949, [111, 78])</p>
+<p>(1937, [1, -2])</p>
+<p>(1945, [1, 2, 78])</p>
+<p>在reduce过程中，在列表中选择出最大的温度，将年-最大温度的key-value作为输出：</p>
+<p>(1950, 22)</p>
+<p>(1949, 111)</p>
+<p>(1937, 1)</p>
+<p>(1945, 78)</p>
+<p>其逻辑过程可用如下图表示：</p>
+<p><a target="_blank" rel="noopener" href="http://images.cnblogs.com/cnblogs_com/forfuture1978/WindowsLiveWriter/Hadoop_34D/image_2.png"><img src="http://ivanbuaa.files.wordpress.com/2012/11/image1.png" alt="Image(1)" title="Image(1)"></a></p>
+<h3 id="2、编写Map-Reduce程序"><a href="#2、编写Map-Reduce程序" class="headerlink" title="2、编写Map-Reduce程序"></a>2、编写Map-Reduce程序</h3><p>编写Map-Reduce程序，一般需要实现两个函数：mapper中的map函数和reducer中的reduce函数。</p>
+<p>一般遵循以下格式：</p>
+<ul>
+<li>map: (K1, V1)&amp;#160; -&gt;&amp;#160; list(K2, V2)</li>
+</ul>
+<p>public interface Mapper&lt;K1, V1, K2, V2&gt; extends JobConfigurable, Closeable {</p>
+<p>&amp;#160; void map(K1 key, V1 value, OutputCollector&lt;K2, V2&gt; output, Reporter reporter)</p>
+<p>&amp;#160; throws IOException;</p>
+<p>}</p>
+<ul>
+<li>reduce: (K2, list(V))&amp;#160; -&gt;&amp;#160; list(K3, V3)</li>
+</ul>
+<p>public interface Reducer&lt;K2, V2, K3, V3&gt; extends JobConfigurable, Closeable {</p>
+<p>&amp;#160; void reduce(K2 key, Iterator&lt;V2&gt; values,</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; OutputCollector&lt;K3, V3&gt; output, Reporter reporter)</p>
+<p>&amp;#160;&amp;#160;&amp;#160; throws IOException;</p>
+<p>}</p>
+<p>对于上面的例子，则实现的mapper如下：</p>
+<p>public class MaxTemperatureMapper extends MapReduceBase implements Mapper&lt;LongWritable, Text, Text, IntWritable&gt; {</p>
+<p>&amp;#160;&amp;#160;&amp;#160; @Override</p>
+<p>&amp;#160;&amp;#160;&amp;#160; public void map(LongWritable key, Text value, OutputCollector&lt;Text, IntWritable&gt; output, Reporter reporter) throws IOException {</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; String line &#x3D; value.toString();</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; String year &#x3D; line.substring(15, 19);</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; int airTemperature;</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; if (line.charAt(25) &#x3D;&#x3D; ‘+’) {</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; airTemperature &#x3D; Integer.parseInt(line.substring(26, 30));</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; } else {</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; airTemperature &#x3D; Integer.parseInt(line.substring(25, 30));</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; }</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; output.collect(new Text(year), new IntWritable(airTemperature));</p>
+<p>&amp;#160;&amp;#160;&amp;#160; }</p>
+<p>}</p>
+<p>实现的reducer如下：</p>
+<p>public class MaxTemperatureReducer extends MapReduceBase implements Reducer&lt;Text, IntWritable, Text, IntWritable&gt; {</p>
+<p>&amp;#160;&amp;#160;&amp;#160; public void reduce(Text key, Iterator&lt;IntWritable&gt; values, OutputCollector&lt;Text, IntWritable&gt; output, Reporter reporter) throws IOException {</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; int maxValue &#x3D; Integer.MIN_VALUE;</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; while (values.hasNext()) {</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; maxValue &#x3D; Math.max(maxValue, values.next().get());</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; }</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; output.collect(key, new IntWritable(maxValue));</p>
+<p>&amp;#160;&amp;#160;&amp;#160; }</p>
+<p>}</p>
+<p>欲运行上面实现的Mapper和Reduce，则需要生成一个Map-Reduce得任务(Job)，其基本包括以下三部分：</p>
+<ul>
+<li>输入的数据，也即需要处理的数据*   Map-Reduce程序，也即上面实现的Mapper和Reducer*   此任务的配置项JobConf</li>
+</ul>
+<p>欲配置JobConf，需要大致了解Hadoop运行job的基本原理：</p>
+<ul>
+<li><p>Hadoop将Job分成task进行处理，共两种task：map task和reduce task*   Hadoop有两类的节点控制job的运行：JobTracker和TaskTracker  </p>
+</li>
+<li><p>JobTracker协调整个job的运行，将task分配到不同的TaskTracker上*   TaskTracker负责运行task，并将结果返回给JobTracker  </p>
+</li>
+<li><p>Hadoop将输入数据分成固定大小的块，我们称之input split*   Hadoop为每一个input split创建一个task，在此task中依次处理此split中的一个个记录(record)*   Hadoop会尽量让输入数据块所在的DataNode和task所执行的DataNode(每个DataNode上都有一个TaskTracker)为同一个，可以提高运行效率，所以input split的大小也一般是HDFS的block的大小。*   Reduce task的输入一般为Map Task的输出，Reduce Task的输出为整个job的输出，保存在HDFS上。*   在reduce中，相同key的所有的记录一定会到同一个TaskTracker上面运行，然而不同的key可以在不同的TaskTracker上面运行，我们称之为partition  </p>
+</li>
+<li><p>partition的规则为：(K2, V2) –&gt; Integer， 也即根据K2，生成一个partition的id，具有相同id的K2则进入同一个partition，被同一个TaskTracker上被同一个Reducer进行处理。</p>
+</li>
+</ul>
+<p>public interface Partitioner&lt;K2, V2&gt; extends JobConfigurable {</p>
+<p>&amp;#160; int getPartition(K2 key, V2 value, int numPartitions);</p>
+<p>}</p>
+<p>下图大概描述了Map-Reduce的Job运行的基本原理：</p>
+<p><a target="_blank" rel="noopener" href="http://images.cnblogs.com/cnblogs_com/forfuture1978/WindowsLiveWriter/Hadoop_34D/image_4.png"><img src="http://ivanbuaa.files.wordpress.com/2012/11/image2.png" alt="Image(2)" title="Image(2)"></a></p>
+<p>下面我们讨论JobConf，其有很多的项可以进行配置：</p>
+<ul>
+<li>setInputFormat：设置map的输入格式，默认为TextInputFormat，key为LongWritable, value为Text*   setNumMapTasks：设置map任务的个数，此设置通常不起作用，map任务的个数取决于输入的数据所能分成的input split的个数*   setMapperClass：设置Mapper，默认为IdentityMapper*   setMapRunnerClass：设置MapRunner, map task是由MapRunner运行的，默认为MapRunnable，其功能为读取input split的一个个record，依次调用Mapper的map函数*   setMapOutputKeyClass和setMapOutputValueClass：设置Mapper的输出的key-value对的格式*   setOutputKeyClass和setOutputValueClass：设置Reducer的输出的key-value对的格式*   setPartitionerClass和setNumReduceTasks：设置Partitioner，默认为HashPartitioner，其根据key的hash值来决定进入哪个partition，每个partition被一个reduce task处理，所以partition的个数等于reduce task的个数*   setReducerClass：设置Reducer，默认为IdentityReducer*   setOutputFormat：设置任务的输出格式，默认为TextOutputFormat*   FileInputFormat.addInputPath：设置输入文件的路径，可以使一个文件，一个路径，一个通配符。可以被调用多次添加多个路径*   FileOutputFormat.setOutputPath：设置输出文件的路径，在job运行前此路径不应该存在</li>
+</ul>
+<p>当然不用所有的都设置，由上面的例子，可以编写Map-Reduce程序如下：</p>
+<p>public class MaxTemperature {</p>
+<p>&amp;#160;&amp;#160;&amp;#160; public static void main(String[] args) throws IOException {</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; if (args.length !&#x3D; 2) {</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; System.err.println(&quot;Usage: MaxTemperature &lt;input path&gt; &lt;output path&gt;&quot;);</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; System.exit(-1);</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; }</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; JobConf conf &#x3D; new JobConf(MaxTemperature.class);</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; conf.setJobName(&quot;Max temperature&quot;);</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; FileInputFormat.addInputPath(conf, new Path(args[0]));</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; FileOutputFormat.setOutputPath(conf, new Path(args[1]));</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; conf.setMapperClass(MaxTemperatureMapper.class);</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; conf.setReducerClass(MaxTemperatureReducer.class);</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; conf.setOutputKeyClass(Text.class);</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; conf.setOutputValueClass(IntWritable.class);</p>
+<p>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; JobClient.runJob(conf);</p>
+<p>&amp;#160;&amp;#160;&amp;#160; }</p>
+<p>}</p>
+<h3 id="3、Map-Reduce数据流-data-flow"><a href="#3、Map-Reduce数据流-data-flow" class="headerlink" title="3、Map-Reduce数据流(data flow)"></a>3、Map-Reduce数据流(data flow)</h3><p>Map-Reduce的处理过程主要涉及以下四个部分：</p>
+<ul>
+<li>客户端Client：用于提交Map-reduce任务job*   JobTracker：协调整个job的运行，其为一个Java进程，其main class为JobTracker*   TaskTracker：运行此job的task，处理input split，其为一个Java进程，其main class为TaskTracker*   HDFS：hadoop分布式文件系统，用于在各个进程间共享Job相关的文件</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://images.cnblogs.com/cnblogs_com/forfuture1978/WindowsLiveWriter/Hadoop_34D/image_6.png"><img src="http://ivanbuaa.files.wordpress.com/2012/11/image3.png" alt="Image(3)" title="Image(3)"></a></p>
+<h4 id="3-1、任务提交"><a href="#3-1、任务提交" class="headerlink" title="3.1、任务提交"></a>3.1、任务提交</h4><p>JobClient.runJob()创建一个新的JobClient实例，调用其submitJob()函数。</p>
+<ul>
+<li>向JobTracker请求一个新的job ID*   检测此job的output配置*   计算此job的input splits*   将Job运行所需的资源拷贝到JobTracker的文件系统中的文件夹中，包括job jar文件，job.xml配置文件，input splits*   通知JobTracker此Job已经可以运行了</li>
+</ul>
+<p>提交任务后，runJob每隔一秒钟轮询一次job的进度，将进度返回到命令行，直到任务运行完毕。</p>
+<h4 id="3-2、任务初始化"><a href="#3-2、任务初始化" class="headerlink" title="3.2、任务初始化"></a>3.2、任务初始化</h4><p>当JobTracker收到submitJob调用的时候，将此任务放到一个队列中，job调度器将从队列中获取任务并初始化任务。</p>
+<p>初始化首先创建一个对象来封装job运行的tasks, status以及progress。</p>
+<p>在创建task之前，job调度器首先从共享文件系统中获得JobClient计算出的input splits。</p>
+<p>其为每个input split创建一个map task。</p>
+<p>每个task被分配一个ID。</p>
+<h4 id="3-3、任务分配"><a href="#3-3、任务分配" class="headerlink" title="3.3、任务分配"></a>3.3、任务分配</h4><p>TaskTracker周期性的向JobTracker发送heartbeat。</p>
+<p>在heartbeat中，TaskTracker告知JobTracker其已经准备运行一个新的task，JobTracker将分配给其一个task。</p>
+<p>在JobTracker为TaskTracker选择一个task之前，JobTracker必须首先按照优先级选择一个Job，在最高优先级的Job中选择一个task。</p>
+<p>TaskTracker有固定数量的位置来运行map task或者reduce task。</p>
+<p>默认的调度器对待map task优先于reduce task</p>
+<p>当选择reduce task的时候，JobTracker并不在多个task之间进行选择，而是直接取下一个，因为reduce task没有数据本地化的概念。</p>
+<h4 id="3-4、任务执行"><a href="#3-4、任务执行" class="headerlink" title="3.4、任务执行"></a>3.4、任务执行</h4><p>TaskTracker被分配了一个task，下面便要运行此task。</p>
+<p>首先，TaskTracker将此job的jar从共享文件系统中拷贝到TaskTracker的文件系统中。</p>
+<p>TaskTracker从distributed cache中将job运行所需要的文件拷贝到本地磁盘。</p>
+<p>其次，其为每个task创建一个本地的工作目录，将jar解压缩到文件目录中。</p>
+<p>其三，其创建一个TaskRunner来运行task。</p>
+<p>TaskRunner创建一个新的JVM来运行task。</p>
+<p>被创建的child JVM和TaskTracker通信来报告运行进度。</p>
+<h6 id=""><a href="#" class="headerlink" title=""></a></h6><h5 id="3-4-1、Map的过程"><a href="#3-4-1、Map的过程" class="headerlink" title="3.4.1、Map的过程"></a>3.4.1、Map的过程</h5><p>MapRunnable从input split中读取一个个的record，然后依次调用Mapper的map函数，将结果输出。</p>
+<p>map的输出并不是直接写入硬盘，而是将其写入缓存memory buffer。</p>
+<p>当buffer中数据的到达一定的大小，一个背景线程将数据开始写入硬盘。</p>
+<p>在写入硬盘之前，内存中的数据通过partitioner分成多个partition。</p>
+<p>在同一个partition中，背景线程会将数据按照key在内存中排序。</p>
+<p>每次从内存向硬盘flush数据，都生成一个新的spill文件。</p>
+<p>当此task结束之前，所有的spill文件被合并为一个整的被partition的而且排好序的文件。</p>
+<p>reducer可以通过http协议请求map的输出文件，tracker.http.threads可以设置http服务线程数。</p>
+<h5 id="3-4-2、Reduce的过程"><a href="#3-4-2、Reduce的过程" class="headerlink" title="3.4.2、Reduce的过程"></a>3.4.2、Reduce的过程</h5><p>当map task结束后，其通知TaskTracker，TaskTracker通知JobTracker。</p>
+<p>对于一个job，JobTracker知道TaskTracer和map输出的对应关系。</p>
+<p>reducer中一个线程周期性的向JobTracker请求map输出的位置，直到其取得了所有的map输出。</p>
+<p>reduce task需要其对应的partition的所有的map输出。</p>
+<p>reduce task中的copy过程即当每个map task结束的时候就开始拷贝输出，因为不同的map task完成时间不同。</p>
+<p>reduce task中有多个copy线程，可以并行拷贝map输出。</p>
+<p>当很多map输出拷贝到reduce task后，一个背景线程将其合并为一个大的排好序的文件。</p>
+<p>当所有的map输出都拷贝到reduce task后，进入sort过程，将所有的map输出合并为大的排好序的文件。</p>
+<p>最后进入reduce过程，调用reducer的reduce函数，处理排好序的输出的每个key，最后的结果写入HDFS。</p>
+<p><a target="_blank" rel="noopener" href="http://images.cnblogs.com/cnblogs_com/forfuture1978/WindowsLiveWriter/Hadoop_34D/image_8.png"><img src="http://ivanbuaa.files.wordpress.com/2012/11/image4.png" alt="Image(4)" title="Image(4)"></a></p>
+<h4 id="3-5、任务结束"><a href="#3-5、任务结束" class="headerlink" title="3.5、任务结束"></a>3.5、任务结束</h4><p>当JobTracker获得最后一个task的运行成功的报告后，将job得状态改为成功。</p>
+<p>当JobClient从JobTracker轮询的时候，发现此job已经成功结束，则向用户打印消息，从runJob函数中返回。</p>
+<p>&amp;#160;</p>
+<p><strong><font size="2">基本数据划分及调度</font></strong></p>
+<p>一个输入分片(input split)是由单个map处理的输入块，即每一个map只处理一个输入分片，每个分片被划分为若干个记录(records)，每条记录就是一个key&#x2F;value对，map一个接一个的处理每条记录，输入分片和记录都是逻辑的，不必将他们对应到文件上。注意，一个分片不包含数据本身，而是指向数据的引用和。</p>
+<p>因为FileInputFormat定义的是逻辑结构，不能匹配HDFS块大小，所以TextFileInputFormat的以行为单位的逻辑记录中，很有可能某一行是跨文件块存储的，如下所示</p>
+<p><a target="_blank" rel="noopener" href="http://ivanbuaa.files.wordpress.com/2012/11/image1.jpg"><img src="http://ivanbuaa.files.wordpress.com/2012/11/image1_thumb.jpg" alt="Image(1)" title="Image(1)"></a></p>
+<p>The default schedule of MapReduce in Hadoop:</p>
+<p>In this order: on the same node, on the other node within the same rack and on another node outside the rack.</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2012/11/23/vmware-workstation-use-redhat-enterprise6-e6-90-ad-e5-bb-bahadoop-e8-bf-90-e8-a1-8c-e7-8e-af-e5-a2-83/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2012/11/23/e7-bb-a7-e7-bb-adhadoop-mapreduce-e6-95-b0-e6-8d-ae-e5-88-92-e5-88-86/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

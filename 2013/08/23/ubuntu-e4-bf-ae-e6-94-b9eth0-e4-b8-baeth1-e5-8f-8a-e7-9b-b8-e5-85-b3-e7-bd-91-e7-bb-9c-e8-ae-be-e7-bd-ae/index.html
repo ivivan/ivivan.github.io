@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>ubuntu 修改eth0为eth1及相关网络设置 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="software," />
+  
+
+  <meta name="description" content="拿到了Library 里HPC的服务器root用户，扫了一眼配置果然高端， 32个E5CPU，6T硬盘，64G内存，顿时感觉这东西天天用来跑实验真是埋没了～日后手里有16个机器可用，我看很有必要装个BitCoin的矿工程序上去，挖一挖生活费就出来了～ 远程连接碰上些问题，把相关命令记在此～ vim &#x2F;etc&#x2F;udev&#x2F;rules.d&#x2F;70-persisten">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu 修改eth0为eth1及相关网络设置">
+<meta property="og:url" content="http://www.ivivan.com/2013/08/23/ubuntu-e4-bf-ae-e6-94-b9eth0-e4-b8-baeth1-e5-8f-8a-e7-9b-b8-e5-85-b3-e7-bd-91-e7-bb-9c-e8-ae-be-e7-bd-ae/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="拿到了Library 里HPC的服务器root用户，扫了一眼配置果然高端， 32个E5CPU，6T硬盘，64G内存，顿时感觉这东西天天用来跑实验真是埋没了～日后手里有16个机器可用，我看很有必要装个BitCoin的矿工程序上去，挖一挖生活费就出来了～ 远程连接碰上些问题，把相关命令记在此～ vim &#x2F;etc&#x2F;udev&#x2F;rules.d&#x2F;70-persisten">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2013-08-23T15:58:47.000Z">
+<meta property="article:modified_time" content="2022-12-21T11:28:01.345Z">
+<meta property="article:author" content="Ivan">
+<meta property="article:tag" content="software">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-ubuntu-e4-bf-ae-e6-94-b9eth0-e4-b8-baeth1-e5-8f-8a-e7-9b-b8-e5-85-b3-e7-bd-91-e7-bb-9c-e8-ae-be-e7-bd-ae" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">ubuntu 修改eth0为eth1及相关网络设置</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2013.08.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%9B%BD%E5%A2%83%E4%BB%A5%E5%8D%97/">国境以南</a> / <a class="article-category-link" href="/categories/%E5%9B%BD%E5%A2%83%E4%BB%A5%E5%8D%97/%E5%B7%A5%E4%BD%9C%E7%9B%B8%E5%85%B3/">工作相关</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>拿到了Library 里HPC的服务器root用户，扫了一眼配置果然高端， 32个E5CPU，6T硬盘，64G内存，顿时感觉这东西天天用来跑实验真是埋没了～日后手里有16个机器可用，我看很有必要装个BitCoin的矿工程序上去，挖一挖生活费就出来了～</p>
+<p>远程连接碰上些问题，把相关命令记在此～</p>
+<p>vim &#x2F;etc&#x2F;udev&#x2F;rules.d&#x2F;70-persistent-net.rules<br>修改对应ethX即可</p>
+<p>eth0为第一个有线网卡，按顺序0123….</p>
+<p>配置IP地址</p>
+<div>vim /etc/network/interfaces
+<div></div>
+<div>
+<div>auto lo</div>
+<div>iface lo inet loopback</div>
+<div>auto eth1</div>
+<div></div>
+<div>iface  eth1 inet static</div>
+<div>address 192.168.1.100</div>
+<div>netmask 255.255.255.0</div>
+<div>gateway 192.168.1.254</div>
+</div>
+</div>
+<pre>重启网络
+/etc/init.d/networking restart
+
+<p>每次远程时都要来来回回刷新几次才能成功，不过没想明白问题在哪，先凑合用着，以后解决～</pre><br>&amp;nbsp;</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2013/08/21/e7-94-9f-e6-b4-bb-e5-b0-b1-e6-98-af-e4-b8-8d-e7-9f-ab-e6-83-85-e7-9a-84-e5-bf-b5-e6-83-b3/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2013/08/23/vnc-server-e5-92-8cvnc-viewer-e4-bd-bf-e7-94-a8-e6-96-b9-e6-b3-95/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

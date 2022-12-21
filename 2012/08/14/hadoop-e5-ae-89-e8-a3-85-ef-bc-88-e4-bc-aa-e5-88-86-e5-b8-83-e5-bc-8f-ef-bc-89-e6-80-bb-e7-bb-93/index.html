@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hadoop安装（伪分布式）总结 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it" />
+  
+
+  <meta name="description" content="申请的电脑还没批下，只得用现有的Laptop装上ubuntu12.04搭了一个伪分布式的Hadoop系统，部分安装过程至今尚未搞清，不过还好不影响正常的运行和程序调试 系统：ubuntu12.04 64位版 Hadoop1.0.3 以下转一篇写的算是很清楚的安装日志，不过在实际过程中还是出现了一堆问题，补充在最后 一. 在Ubuntu下创建hadoop用户组和用户; 1. 创建hadoop用户组;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop安装（伪分布式）总结">
+<meta property="og:url" content="http://www.ivivan.com/2012/08/14/hadoop-e5-ae-89-e8-a3-85-ef-bc-88-e4-bc-aa-e5-88-86-e5-b8-83-e5-bc-8f-ef-bc-89-e6-80-bb-e7-bb-93/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="申请的电脑还没批下，只得用现有的Laptop装上ubuntu12.04搭了一个伪分布式的Hadoop系统，部分安装过程至今尚未搞清，不过还好不影响正常的运行和程序调试 系统：ubuntu12.04 64位版 Hadoop1.0.3 以下转一篇写的算是很清楚的安装日志，不过在实际过程中还是出现了一堆问题，补充在最后 一. 在Ubuntu下创建hadoop用户组和用户; 1. 创建hadoop用户组;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://m1.img.libdd.com/farm4/247/A4F7CC07CA789BE5AC25E7952B8411F7_411_125.PNG">
+<meta property="og:image" content="http://m2.img.libdd.com/farm4/242/C09A95E53257EBCCB22E5B5C4D649DF2_500_276.jpg">
+<meta property="og:image" content="http://m3.img.libdd.com/farm4/90/7A4ACE8A99AE1F3DCA45BFEDE5CB985A_347_163.PNG">
+<meta property="og:image" content="http://m1.img.libdd.com/farm4/37/106AEB25E755F6FD72553E88A39EC625_500_272.jpg">
+<meta property="og:image" content="http://m3.img.libdd.com/farm4/32/CF23A8FFAF35FF4D2C241118CAC23920_438_90.PNG">
+<meta property="og:image" content="http://m3.img.libdd.com/farm4/17/80D479F1992B9BE98BA476ECA5D0B611_500_333.jpg">
+<meta property="og:image" content="http://m3.img.libdd.com/farm4/172/442846248D642A775F7970A956DB4CAC_500_43.jpg">
+<meta property="og:image" content="http://m3.img.libdd.com/farm5/136/32EA7B6BD6013BAA9B160AEE5C084088_500_103.jpg">
+<meta property="og:image" content="http://m3.img.libdd.com/farm5/121/1F30C66942D136BA64589626F7FAC579_406_202.PNG">
+<meta property="article:published_time" content="2012-08-14T18:11:00.000Z">
+<meta property="article:modified_time" content="2022-12-21T11:28:01.341Z">
+<meta property="article:author" content="Ivan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://m1.img.libdd.com/farm4/247/A4F7CC07CA789BE5AC25E7952B8411F7_411_125.PNG">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-hadoop-e5-ae-89-e8-a3-85-ef-bc-88-e4-bc-aa-e5-88-86-e5-b8-83-e5-bc-8f-ef-bc-89-e6-80-bb-e7-bb-93" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Hadoop安装（伪分布式）总结</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2012.08.14</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%9B%BD%E5%A2%83%E4%BB%A5%E5%8D%97/">国境以南</a> / <a class="article-category-link" href="/categories/%E5%9B%BD%E5%A2%83%E4%BB%A5%E5%8D%97/%E5%B7%A5%E4%BD%9C%E7%9B%B8%E5%85%B3/">工作相关</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p><font size="2" face="微软雅黑">申请的电脑还没批下，只得用现有的Laptop装上ubuntu12.04搭了一个伪分布式的Hadoop系统，部分安装过程至今尚未搞清，不过还好不影响正常的运行和程序调试</font></p>
+<p><font size="2" face="微软雅黑">系统：ubuntu12.04 64位版 Hadoop1.0.3</font></p>
+<p><font size="2" face="微软雅黑">以下转一篇写的算是很清楚的安装日志，不过在实际过程中还是出现了一堆问题，补充在最后</font></p>
+<p><strong><font size="2" face="微软雅黑">一. 在Ubuntu下创建hadoop用户组和用户;</font></strong></p>
+<p><font face="微软雅黑"></font><font size="2"><strong>1.</strong> 创建hadoop用户组;</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>addgroup hadoop</code></font></p>
+<p><font size="2" face="微软雅黑">如图：</font></p>
+<p><font size="2" face="微软雅黑"><img src="http://m1.img.libdd.com/farm4/247/A4F7CC07CA789BE5AC25E7952B8411F7_411_125.PNG"></font></p>
+<p><font face="微软雅黑"></font><font size="2">**2. **创建hadoop用户;</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>adduser -ingroup hadoop hadoop</code></font></p>
+<p><font size="2" face="微软雅黑">如图：</font></p>
+<p><font size="2" face="微软雅黑"><img src="http://m2.img.libdd.com/farm4/242/C09A95E53257EBCCB22E5B5C4D649DF2_500_276.jpg"></font></p>
+<p><font face="微软雅黑"></font><font size="2">**3. **给hadoop用户添加权限，打开&#x2F;etc&#x2F;sudoers文件;</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>gedit ``/etc/sudoers</code></font></p>
+<p><font size="2" face="微软雅黑">按回车键后就会打开&#x2F;etc&#x2F;sudoers文件了，给hadoop用户赋予root用户同样的权限。</font></p>
+<p><font size="1" face="微软雅黑">在root&amp;#160;&amp;#160; ALL&#x3D;(ALL:ALL)&amp;#160;&amp;#160; ALL下添加hadoop&amp;#160;&amp;#160; ALL&#x3D;(ALL:ALL)&amp;#160; ALL，</font></p>
+<p><font size="2" face="微软雅黑">1 </font><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;hadoop&amp;#160; ALL=(ALL:ALL) ALL&lt;/font&gt;</code></p>
+<p><font size="2" face="微软雅黑">如图：</font></p>
+<p><font size="2" face="微软雅黑"><img src="http://m3.img.libdd.com/farm4/90/7A4ACE8A99AE1F3DCA45BFEDE5CB985A_347_163.PNG"></font></p>
+<p><strong><font size="2" face="微软雅黑">三. 在Ubuntu下安装JDK</font></strong></p>
+<p><font size="2" face="微软雅黑">使用如下命令执行即可：</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>apt-get ``install</code> <code>openjdk-6-jre</code></font></p>
+<p><font size="2" face="微软雅黑">如图：</font></p>
+<p><font size="2" face="微软雅黑"><img src="http://m1.img.libdd.com/farm4/37/106AEB25E755F6FD72553E88A39EC625_500_272.jpg"></font></p>
+<p><strong><font size="2" face="微软雅黑">四. 修改机器名</font></strong></p>
+<p><font size="2" face="微软雅黑">每当ubuntu安装成功时，我们的机器名都默认为：ubuntu ，但为了以后集群中能够容易分辨各台服务器，需要给每台机器取个不同的名字。机器名由 &#x2F;etc&#x2F;hostname文件决定。</font></p>
+<p><font face="微软雅黑"></font><font size="2">**1. **打开&#x2F;etc&#x2F;hostname文件;</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>gedit ``/etc/hostname</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><strong>2. <strong>将&#x2F;etc&#x2F;hostname文件中的ubuntu改为你想取的机器名。这里我取&quot;dubin-ubuntu&quot;。</strong> 重启系统后才会生效。</strong></font></p>
+<p><strong><font size="2" face="微软雅黑">五. 安装ssh服务</font></strong></p>
+<p><font size="2" face="微软雅黑">这里的ssh和三大框架:spring,struts,hibernate没有什么关系，ssh可以实现远程登录和管理，具体可以参考其他相关资料。</font></p>
+<p><font size="2" face="微软雅黑">安装openssh-server;</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>apt-get ``install</code> <code>ssh</code> <code>openssh-server</code></font></p>
+<p><font size="2" face="微软雅黑">这时假设您已经安装好了ssh，您就可以进行第六步了哦~</font></p>
+<p><strong><font size="2" face="微软雅黑">六、 建立ssh无密码登录本机</font></strong></p>
+<p><font face="微软雅黑"></font><font size="2"><strong>首先</strong>要转换成hadoop用户，执行以下命令：</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>su</code> <code>- hadoop</code></font></p>
+<p><font size="2" face="微软雅黑">如图：</font></p>
+<p><font size="2" face="微软雅黑"><img src="http://m3.img.libdd.com/farm4/32/CF23A8FFAF35FF4D2C241118CAC23920_438_90.PNG"></font></p>
+<p><font size="2" face="微软雅黑">ssh生成密钥有rsa和dsa两种生成方式，默认情况下采用rsa方式。</font></p>
+<p><font face="微软雅黑"></font><font size="2">**1. **创建ssh-key，，这里我们采用rsa方式;</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>ssh``-keygen -t rsa -P ``&amp;quot;&amp;quot;</code></font></p>
+<p><font size="2" face="微软雅黑">如图：</font></p>
+<p><font size="2" face="微软雅黑"><img src="http://m3.img.libdd.com/farm4/17/80D479F1992B9BE98BA476ECA5D0B611_500_333.jpg"></font></p>
+<p><font size="2" face="微软雅黑">（注：回车后会在~&#x2F;.ssh&#x2F;下生成两个文件：id_rsa和id_rsa.pub这两个文件是成对出现的）</font></p>
+<p><font face="微软雅黑"></font><font size="2">**2. **进入~&#x2F;.ssh&#x2F;目录下，将id_rsa.pub追加到authorized_keys授权文件中，开始是没有authorized_keys文件的;</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>cd</code> <code>~/.``ssh</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>cat</code> <code>id_rsa.pub &amp;gt;&amp;gt; authorized_keys</code></font></p>
+<p><font size="2" face="微软雅黑">如图：</font></p>
+<p><font size="2" face="微软雅黑"><img src="http://m3.img.libdd.com/farm4/172/442846248D642A775F7970A956DB4CAC_500_43.jpg"></font></p>
+<p><font size="2" face="微软雅黑">（完成后就可以无密码登录本机了。）</font></p>
+<p><font face="微软雅黑"></font><font size="2">**3. **登录localhost;</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>ssh</code> <code>localhost</code></font></p>
+<p><font size="2" face="微软雅黑">如图：</font></p>
+<p><font size="2" face="微软雅黑">( 注：当ssh远程登录到其它机器后，现在你控制的是远程的机器，需要执行退出命令才能重新控制本地主机。)</font></p>
+<p><font face="微软雅黑"></font><font size="2">**4. **执行退出命令;</font></p>
+<p><font size="2" face="微软雅黑">1 </font><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;exit&lt;/font&gt;</code></p>
+<p><strong><font size="2" face="微软雅黑">七. 安装hadoop</font></strong></p>
+<p><font size="2" face="微软雅黑">我们采用的hadoop版本是：hadoop-0.20.203（</font><a target="_blank" rel="noopener" href="http://www.apache.org/dyn/closer.cgi/hadoop/common/"><font size="2" face="微软雅黑">http://www.apache.org/dyn/closer.cgi/hadoop/common/&#160; </font></a><font size="2" face="微软雅黑">），因为该版本比较稳定。</font></p>
+<p><font face="微软雅黑"></font><font size="2">**1. **假设hadoop-0.20.203.tar.gz在桌面，将它复制到安装目录 &#x2F;usr&#x2F;local&#x2F;下；</font></p>
+<p><font size="2" face="微软雅黑">1 </font><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>cp</code> <code>hadoop-0.20.203.0rc1.``tar``.gz ``/usr/local/</code></font></p>
+<p><font face="微软雅黑"></font><font size="2">**2. **解压hadoop-0.20.203.tar.gz；</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>cd</code> <code>/usr/local</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>tar</code> <code>-zxf hadoop-0.20.203.0rc1.``tar``.gz</code></font></p>
+<p><font face="微软雅黑"></font><font size="2">**3. **将解压出的文件夹改名为hadoop;</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>mv</code> <code>hadoop-0.20.203.0 hadoop</code></font></p>
+<p><font face="微软雅黑"></font><font size="2">**4. **将该hadoop文件夹的属主用户设为hadoop，</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>chown</code> <code>-R hadoop:hadoop hadoop</code></font></p>
+<p><font face="微软雅黑"></font><font size="2">**5. **打开hadoop&#x2F;conf&#x2F;hadoop-env.sh文件;</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>gedit hadoop``/conf/hadoop-env``.sh</code></font></p>
+<p><font face="微软雅黑"></font><font size="2">**6. **配置conf&#x2F;hadoop-env.sh（找到#export JAVA_HOME&#x3D;…,去掉#，然后加上本机jdk的路径）;</font></p>
+<p><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;export JAVA_HOME=/usr/lib/jvm/java-6-openjdk&lt;/font&gt;</code></p>
+<p><font face="微软雅黑"></font><font size="2">**7. **打开conf&#x2F;core-site.xml文件;</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>gedit hadoop``/conf/core-site``.xml</code></font></p>
+<p><font size="2" face="微软雅黑">编辑如下：</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;?``xml</code> <code>version``=``&amp;quot;1.0&amp;quot;``?&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;?``xml-stylesheet</code> <code>type``=``&amp;quot;text/xsl&amp;quot;</code> <code>href``=``&amp;quot;configuration.xsl&amp;quot;``?&amp;gt;</code></font></p>
+<p><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;&lt;/font&gt;</code></p>
+<p><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;&amp;lt;!-- Put site-specific property overrides in this file. --&amp;gt;&lt;/font&gt;</code></p>
+<p><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;&lt;/font&gt;</code></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``configuration``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``property``&amp;gt;&amp;#160; </code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``name``&amp;gt;fs.default.name&amp;lt;/``name``&amp;gt;&amp;#160; </code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``value``&amp;gt;[hdfs://localhost:9000](9000)&amp;lt;/``value``&amp;gt;&amp;#160;&amp;#160; </code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;/``property``&amp;gt;&amp;#160; </code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;/``configuration``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2">**8. **打开conf&#x2F;mapred-site.xml文件;</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>gedit hadoop``/conf/mapred-site``.xml</code></font></p>
+<p><font size="2" face="微软雅黑">编辑如下：</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;?``xml</code> <code>version``=``&amp;quot;1.0&amp;quot;``?&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;?``xml-stylesheet</code> <code>type``=``&amp;quot;text/xsl&amp;quot;</code> <code>href``=``&amp;quot;configuration.xsl&amp;quot;``?&amp;gt;</code></font></p>
+<p><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;&lt;/font&gt;</code></p>
+<p><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;&amp;lt;!-- Put site-specific property overrides in this file. --&amp;gt;&lt;/font&gt;</code></p>
+<p><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;&lt;/font&gt;</code></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``configuration``&amp;gt;&amp;#160; </code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``property``&amp;gt;&amp;#160;&amp;#160; </code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``name``&amp;gt;mapred.job.tracker&amp;lt;/``name``&amp;gt;&amp;#160; </code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``value``&amp;gt;localhost:9001&amp;lt;/``value``&amp;gt;&amp;#160;&amp;#160; </code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;/``property``&amp;gt;&amp;#160; </code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;/``configuration``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2">**9. **打开conf&#x2F;hdfs-site.xml文件;</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>gedit hadoop``/conf/hdfs-site``.xml</code></font></p>
+<p><font size="2" face="微软雅黑">编辑如下：</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``configuration``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``property``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``name``&amp;gt;dfs.name.dir&amp;lt;/``name``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``value``&amp;gt;/usr/local/hadoop/datalog1,/usr/local/hadoop/datalog2&amp;lt;/``value``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;/``property``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``property``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``name``&amp;gt;dfs.data.dir&amp;lt;/``name``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``value``&amp;gt;/usr/local/hadoop/data1,/usr/local/hadoop/data2&amp;lt;/``value``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;/``property``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``property``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``name``&amp;gt;dfs.replication&amp;lt;/``name``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;``value``&amp;gt;2&amp;lt;/``value``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;/``property``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>&amp;lt;/``configuration``&amp;gt;</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><strong>10. <strong>打开conf&#x2F;masters文件，添加作为secondarynamenode的主机名，作为单机版环境，这里只需填写</strong> localhost</strong> 就Ok了。</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>gedit hadoop``/conf/masters</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><strong>11. <strong>打开conf&#x2F;slaves文件，添加作为slave的主机名，一行一个。作为单机版，这里也只需填写</strong> localhost</strong>就Ok了。</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>sudo</code> <code>gedit hadoop``/conf/slaves</code></font></p>
+<p><strong><font size="2" face="微软雅黑">八. 在单机上运行hadoop</font></strong></p>
+<p><font face="微软雅黑"></font><font size="2">**1. **进入hadoop目录下，格式化hdfs文件系统，初次运行hadoop时一定要有该操作，</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>cd</code> <code>/usr/local/hadoop/</code></font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>bin``/hadoop</code> <code>namenode -``format</code></font></p>
+<p><font face="微软雅黑"></font><font size="2">**2. **当你看到下图时，就说明你的hdfs文件系统格式化成功了。</font></p>
+<p><font size="2" face="微软雅黑"><img src="http://m3.img.libdd.com/farm5/136/32EA7B6BD6013BAA9B160AEE5C084088_500_103.jpg"></font></p>
+<p><font face="微软雅黑"></font><font size="2">**3. **启动bin&#x2F;start-all.sh</font></p>
+<p><font face="微软雅黑"></font><font size="2"><code>bin``/start-all``.sh</code></font></p>
+<p><font face="微软雅黑"></font><font size="2">**4. **检测hadoop是否启动成功</font></p>
+<p><code>&lt;font size=&quot;2&quot; face=&quot;微软雅黑&quot;&gt;jps&lt;/font&gt;</code></p>
+<p><font size="2" face="微软雅黑">如果有Namenode，SecondaryNameNode，TaskTracker，DataNode，JobTracker五个进程，就说明你的hadoop单机版环境配置好了！</font></p>
+<p><font size="2" face="微软雅黑">如下图：</font></p>
+<p><font size="2" face="微软雅黑"><img src="http://m3.img.libdd.com/farm5/121/1F30C66942D136BA64589626F7FAC579_406_202.PNG"></font></p>
+<p><font size="2" face="微软雅黑"></font></p>
+<p><font size="2" face="微软雅黑">基本上，我的Hadoop安装参考了以上日志的大部分，其中出现的问题解决如下：</font></p>
+<p><font size="2" face="微软雅黑">1. 第一次安装时我的ubuntu系统存在一个用户，hadoop用户为后添加，结果在用户的权限上出了很多问题，始终无法解决，后来把ubuntu重装，hadoop设成唯一的用户，问题解决</font></p>
+<p><font size="2" face="微软雅黑">2. 此日志中使用了open java JDK，其它很多日志提出使用java公司的JDK更好，我在最后的安装中使用了java的JDK7, openjdk为ubuntu自带，免安装，也基本不用配置，java jdk需要自行下载安装配置，比较繁琐，放在另一篇日志中详谈</font></p>
+<p><font size="2" face="微软雅黑">3. Ubuntu下测试ssh时使用ssh localhost 命令，出现错误提示connect to host localhost port 22:Connection refused</font></p>
+<p><font size="2" face="微软雅黑">造成这个错误的原因可能是ssh-server未安装或者未启动。ubuntu默认安装openssh-client，但是木有安装server</font></p>
+<p><font size="2" face="微软雅黑">运行 ps -e | grep ssh，查看是否有sshd进程</font></p>
+<p><font size="2" face="微软雅黑">如果没有，说明server没启动，通过 &#x2F;etc&#x2F;init.d&#x2F;ssh -start 启动server进程，如果提示ssh不存在 那么就是没安装server</font></p>
+<p><font size="2" face="微软雅黑">通过 sudo apt-get install openssh-server命令安装即可</font></p>
+<p><font size="2" face="微软雅黑">4. jps命令无效</font></p>
+<p><font size="2" face="微软雅黑">重启后解决</font></p>
+<p>&lt;</p>
+<p>p&gt;<font size="2" face="微软雅黑">5. ssh 如有问题，基本上是要手动设置不同文件和文件夹的权限</font></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2012/08/14/e4-bb-8e-e4-b8-a4-e5-b0-8f-e6-97-b6-e5-88-b0-e4-b9-9d-e7-99-be-e5-85-ac-e9-87-8c/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2012/08/14/ubuntu-e4-b8-8b-e6-89-8b-e5-8a-a8-e5-ae-89-e8-a3-85jdk-e5-8f-8a-e9-85-8d-e7-bd-ae-e8-bd-ac/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

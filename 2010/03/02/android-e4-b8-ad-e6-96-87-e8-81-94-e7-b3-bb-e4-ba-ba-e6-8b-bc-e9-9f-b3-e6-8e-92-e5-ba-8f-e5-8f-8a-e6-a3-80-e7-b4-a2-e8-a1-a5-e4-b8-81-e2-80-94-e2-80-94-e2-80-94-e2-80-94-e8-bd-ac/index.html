@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android中文联系人拼音排序及检索补丁————转 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it" />
+  
+
+  <meta name="description" content="自制rom的关键一步，收藏自网上牛人，使用如下：   刷固件的方法一样（建议使用JF的recovry程序） 安装后如果无效，就进命令行先运行命令“su”。使用T-Mobile固件的，运行命令“&#x2F;data&#x2F;patch&#x2F;uptm.sh”；使用其它固件的运行命令“&#x2F;data&#x2F;patch&#x2F;up.sh”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android中文联系人拼音排序及检索补丁————转">
+<meta property="og:url" content="http://www.ivivan.com/2010/03/02/android-e4-b8-ad-e6-96-87-e8-81-94-e7-b3-bb-e4-ba-ba-e6-8b-bc-e9-9f-b3-e6-8e-92-e5-ba-8f-e5-8f-8a-e6-a3-80-e7-b4-a2-e8-a1-a5-e4-b8-81-e2-80-94-e2-80-94-e2-80-94-e2-80-94-e8-bd-ac/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="自制rom的关键一步，收藏自网上牛人，使用如下：   刷固件的方法一样（建议使用JF的recovry程序） 安装后如果无效，就进命令行先运行命令“su”。使用T-Mobile固件的，运行命令“&#x2F;data&#x2F;patch&#x2F;uptm.sh”；使用其它固件的运行命令“&#x2F;data&#x2F;patch&#x2F;up.sh”">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2010-03-02T05:44:54.000Z">
+<meta property="article:modified_time" content="2022-12-21T11:28:01.317Z">
+<meta property="article:author" content="Ivan">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-android-e4-b8-ad-e6-96-87-e8-81-94-e7-b3-bb-e4-ba-ba-e6-8b-bc-e9-9f-b3-e6-8e-92-e5-ba-8f-e5-8f-8a-e6-a3-80-e7-b4-a2-e8-a1-a5-e4-b8-81-e2-80-94-e2-80-94-e2-80-94-e2-80-94-e8-bd-ac" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Android中文联系人拼音排序及检索补丁————转</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2010.03.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%9B%BD%E5%A2%83%E4%BB%A5%E5%8D%97/">国境以南</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <div id="msgcns!1326AB98D6395CF4!1701" class="bvMsg"><div style="background-image:initial;background-attachment:initial;background-color:white;color:black;background-position:initial initial;background-repeat:initial initial;">自制rom的关键一步，收藏自网上牛人，使用如下：<div>
+
+<ul>
+<li>刷固件的方法一样（建议使用JF的recovry程序）</li>
+<li>安装后如果无效，就进命令行先运行命令“su”。使用T-Mobile固件的，运行命令“&#x2F;data&#x2F;patch&#x2F;uptm.sh”；使用其它固件的运行命令“&#x2F;data&#x2F;patch&#x2F;up.sh”</div></div> </div></li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2010/03/02/chrome-e6-89-a9-e5-b1-95host/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2010/03/09/e7-88-b1-e5-9b-bd-e4-b8-bb-e4-b9-89-e5-bd-b1-e7-89-87-e5-b1-95/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hadoop自定义Inputformat | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it" />
+  
+
+  <meta name="description" content="用户可根据基本inputformat及recordreader代码修改得到自定义inputformat，此处代码提供Key为空，Value为整个文件内容的inputformat及recordreader，key与value间默认间隔符可以在执行时通过不同参数调整 修改好两个class文件后，依后文编译替换默认streaming.jar &amp;#160; WholeFileInputFormat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop自定义Inputformat">
+<meta property="og:url" content="http://www.ivivan.com/2012/11/23/hadoop-e8-87-aa-e5-ae-9a-e4-b9-89inputformat/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="用户可根据基本inputformat及recordreader代码修改得到自定义inputformat，此处代码提供Key为空，Value为整个文件内容的inputformat及recordreader，key与value间默认间隔符可以在执行时通过不同参数调整 修改好两个class文件后，依后文编译替换默认streaming.jar &amp;#160; WholeFileInputFormat">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2012-11-23T21:59:00.000Z">
+<meta property="article:modified_time" content="2022-12-21T11:28:01.341Z">
+<meta property="article:author" content="Ivan">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-hadoop-e8-87-aa-e5-ae-9a-e4-b9-89inputformat" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Hadoop自定义Inputformat</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2012.11.23</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%9B%BD%E5%A2%83%E4%BB%A5%E5%8D%97/">国境以南</a> / <a class="article-category-link" href="/categories/%E5%9B%BD%E5%A2%83%E4%BB%A5%E5%8D%97/%E5%B7%A5%E4%BD%9C%E7%9B%B8%E5%85%B3/">工作相关</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>用户可根据基本inputformat及recordreader代码修改得到自定义inputformat，此处代码提供Key为空，Value为整个文件内容的inputformat及recordreader，key与value间默认间隔符可以在执行时通过不同参数调整</p>
+<p>修改好两个class文件后，依后文编译替换默认streaming.jar</p>
+<p>&amp;#160;</p>
+<p>WholeFileInputFormat</p>
+<p>package org.apache.hadoop.streaming;<br>import java.io.IOException;<br>import org.apache.hadoop.fs.<em>;<br>import org.apache.hadoop.io.</em>;<br>import org.apache.hadoop.mapred.*;<br>&#x2F;&#x2F; vv WholeFileInputFormat<br>public class WholeFileInputFormat<br>&amp;#160;&amp;#160;&amp;#160; extends FileInputFormat&lt;Text, BytesWritable&gt; {<br>&amp;#160; @Override<br>&amp;#160; protected boolean isSplitable(FileSystem fs, Path filename) {<br>&amp;#160;&amp;#160;&amp;#160; return false;<br>&amp;#160; }<br>&amp;#160; @Override<br>&amp;#160; public RecordReader&lt;Text, BytesWritable&gt; getRecordReader(<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; InputSplit split, JobConf job, Reporter reporter) throws IOException {<br>&amp;#160;&amp;#160;&amp;#160; return new WholeFileRecordReader((FileSplit) split, job);<br>&amp;#160; }<br>}<br>&#x2F;&#x2F; ^^ WholeFileInputFormat</p>
+<p>package org.apache.hadoop.streaming;<br>&#x2F;&#x2F; cc WholeFileRecordReader The RecordReader used by WholeFileInputFormat for reading a whole file as a record<br>import java.io.IOException;<br>import org.apache.hadoop.conf.Configuration;<br>import org.apache.hadoop.fs.<em>;<br>import org.apache.hadoop.io.</em>;<br>import org.apache.hadoop.mapred.*;<br>&#x2F;&#x2F; vv WholeFileRecordReader<br>class WholeFileRecordReader implements RecordReader&lt;Text, BytesWritable&gt; {<br>&amp;#160; private FileSplit fileSplit;<br>&amp;#160; private Configuration conf;<br>&amp;#160; private boolean processed &#x3D; false;<br>&amp;#160; public WholeFileRecordReader(FileSplit fileSplit, Configuration conf)<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; throws IOException {<br>&amp;#160;&amp;#160;&amp;#160; this.fileSplit &#x3D; fileSplit;<br>&amp;#160;&amp;#160;&amp;#160; this.conf &#x3D; conf;<br>&amp;#160; }<br>&amp;#160; @Override<br>&amp;#160; public Text createKey() {<br>&amp;#160;&amp;#160;&amp;#160; return new Text();<br>&amp;#160; }<br>&amp;#160; @Override<br>&amp;#160; public BytesWritable createValue() {<br>&amp;#160;&amp;#160;&amp;#160; return new BytesWritable();<br>&amp;#160; }<br>&amp;#160; @Override<br>&amp;#160; public long getPos() throws IOException {<br>&amp;#160;&amp;#160;&amp;#160; return processed ? fileSplit.getLength() : 0;<br>&amp;#160; }<br>&amp;#160; @Override<br>&amp;#160; public float getProgress() throws IOException {<br>&amp;#160;&amp;#160;&amp;#160; return processed ? 1.0f : 0.0f;<br>&amp;#160; }<br>&amp;#160; @Override<br>&amp;#160; public boolean next(Text key, BytesWritable value) throws IOException {<br>&amp;#160;&amp;#160;&amp;#160; if (!processed) {<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; byte[] contents &#x3D; new byte[(int) fileSplit.getLength()];<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; Path file &#x3D; fileSplit.getPath();<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; FileSystem fs &#x3D; file.getFileSystem(conf);<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; FSDataInputStream in &#x3D; null;<br>&#x2F;&#x2F;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; key.set(‘&gt;’+file.toString());<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; try {<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; in &#x3D; fs.open(file);<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; IOUtils.readFully(in, contents, 0, contents.length);<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; value.set(contents, 0, contents.length);<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; } finally {<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; IOUtils.closeStream(in);<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; }<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; processed &#x3D; true;<br>&amp;#160;&amp;#160;&amp;#160;&amp;#160;&amp;#160; return true;<br>&amp;#160;&amp;#160;&amp;#160; }<br>&amp;#160;&amp;#160;&amp;#160; return false;<br>&amp;#160; }<br>&amp;#160; @Override<br>&amp;#160; public void close() throws IOException {<br>&amp;#160;&amp;#160;&amp;#160; &#x2F;&#x2F; do nothing<br>&amp;#160; }<br>}<br>&#x2F;&#x2F; ^^ WholeFileRecordReader</p>
+<p>&amp;#160;</p>
+<p>#download hadoop-1.0.0</p>
+<p>#download commons-logging-1.1.1.jar</p>
+<p>mkdir &#x2F;home&#x2F;ubuntu&#x2F;hadoop-1.0.0&#x2F;contrib&#x2F;streaming&#x2F;new_test</p>
+<p>cd &#x2F;home&#x2F;ubuntu&#x2F;hadoop-1.0.0&#x2F;contrib&#x2F;streaming</p>
+<p>#unpack the jar and a directory org is created<br>jar xvf hadoop-streaming-1.0.0.jar</p>
+<p>#put the custom Inputformat and RecordReader (FastaInputFormat.java and FastaRecordReader.java) in org&#x2F;apache&#x2F;hadoop&#x2F;streaming&#x2F; and compile</p>
+<p>javac -classpath &#x2F;home&#x2F;ubuntu&#x2F;hadoop-1.0.0&#x2F;hadoop-core-1.0.0.jar .&#x2F;org&#x2F;apache&#x2F;hadoop&#x2F;streaming&#x2F; *.java</p>
+<p>#create a jar</p>
+<p>jar cvfm hadoop-streaming-1.0.3.jar &#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;contrib&#x2F;streaming&#x2F;new&#x2F;META-INF&#x2F;MANIFEST.MF -C &#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;contrib&#x2F;streaming&#x2F;new&#x2F; .</p>
+<p>#replace the original jar<br>rm ..&#x2F;hadoop-streaming-1.0.0.jar -f</p>
+<p>cp hadoop-streaming-1.0.0.jar ..&#x2F; –f</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2012/11/23/hadoop-streaming-e4-bb-8b-e7-bb-8d-e5-8f-8a-e4-bd-bf-e7-94-a8/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2012/11/23/java-e4-b8-ad-e9-81-8d-e5-8e-86map-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

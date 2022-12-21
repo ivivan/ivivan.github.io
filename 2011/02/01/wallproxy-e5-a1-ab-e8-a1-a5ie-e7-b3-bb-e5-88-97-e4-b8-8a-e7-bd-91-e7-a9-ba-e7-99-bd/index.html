@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>wallproxy,填补IE系列上网空白 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it" />
+  
+
+  <meta name="description" content="回家来用自己的老本，chrome实在是带不动，512的小内存和没有一样，无奈只得转用ie8，别的都还可以忍受，不过IE没有插件系统真是让人生气，SSH方法用不上，VPN我又不太喜欢，找了找，发现有个GAE的wallproxy可以，装上一试，还可以方法：1. 同理一个GAE程序，建好应用后，去http:&#x2F;&#x2F;code.google.com&#x2F;p&#x2F;wallproxy&#x2F; 下载代码包2. 修改gae_serv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="wallproxy,填补IE系列上网空白">
+<meta property="og:url" content="http://www.ivivan.com/2011/02/01/wallproxy-e5-a1-ab-e8-a1-a5ie-e7-b3-bb-e5-88-97-e4-b8-8a-e7-bd-91-e7-a9-ba-e7-99-bd/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="回家来用自己的老本，chrome实在是带不动，512的小内存和没有一样，无奈只得转用ie8，别的都还可以忍受，不过IE没有插件系统真是让人生气，SSH方法用不上，VPN我又不太喜欢，找了找，发现有个GAE的wallproxy可以，装上一试，还可以方法：1. 同理一个GAE程序，建好应用后，去http:&#x2F;&#x2F;code.google.com&#x2F;p&#x2F;wallproxy&#x2F; 下载代码包2. 修改gae_serv">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://ivanbuaa.files.wordpress.com/2011/02/16.jpg">
+<meta property="article:published_time" content="2011-02-01T00:33:20.000Z">
+<meta property="article:modified_time" content="2022-12-21T11:28:01.345Z">
+<meta property="article:author" content="Ivan">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://ivanbuaa.files.wordpress.com/2011/02/16.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-wallproxy-e5-a1-ab-e8-a1-a5ie-e7-b3-bb-e5-88-97-e4-b8-8a-e7-bd-91-e7-a9-ba-e7-99-bd" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">wallproxy,填补IE系列上网空白</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2011.02.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E7%9B%B8%E5%85%B3/">工作相关</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>回家来用自己的老本，chrome实在是带不动，512的小内存和没有一样，无奈只得转用ie8，别的都还可以忍受，不过IE没有插件系统真是让人生气，SSH方法用不上，VPN我又不太喜欢，找了找，发现有个GAE的wallproxy可以，装上一试，还可以<br>方法：<br>1. 同理一个GAE程序，建好应用后，去<a target="_blank" rel="noopener" href="http://code.google.com/p/wallproxy/">http://code.google.com/p/wallproxy/</a> 下载代码包<br>2. 修改gae_server中的app.yaml，把应用名换一下<br>3. 把gae_server包上传<br>4. 修改本地，这里有个local文件夹，可以修改里面，也可以从外面一个窗口显示的界面进行<br>5. 用界面修改，返回上级文件夹，点开wallproxy.exe，点设置如图：<br><a target="_blank" rel="noopener" href="http://ivanbuaa.files.wordpress.com/2011/02/16.jpg"><img src="http://ivanbuaa.files.wordpress.com/2011/02/16.jpg" title="16"></a><br>将图上标注的第一个红框修改成自己的GAE地址如“<a target="_blank" rel="noopener" href="http://xxxx.appspot.com/fetch.php%E2%80%9C">http://xxxx.appspot.com/fetch.php“</a> 并注意把autoproxylist&#x3D;这行前的#号打掉<br>6. 鼠标右击IE属性—Internet选项—连接—局域网设置（拨号选拨号右面的属性）—127.0.0.1：8086</p>
+<p>用了一阵还可以，就是不知自动判断的那个规则表管用了没有，如果能管用，那这个方式还是不错，至少IE用户临时可以应应急了。听说GAE的月流量是1G，以我当年3G上网卡一月3G流量用不了半个月来看，用这个东西也就看看文字了，视频还是悠着点，下载就算了</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2011/01/30/proxy-switchy-e8-a7-a3-e5-86-b3-e5-ae-bd-e6-8b-a8-e5-8f-b7-e9-97-ae-e9-a2-98/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2011/02/17/g1-e6-96-b0-e5-9f-ba-e5-b8-a6-e5-88-b7-e4-bb-bb-e6-84-8from-e8-a7-a3-e5-86-b3/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

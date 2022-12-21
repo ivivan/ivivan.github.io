@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>ubuntu影音设置 | Hear The Wind Sing</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="buaa,brisbane,qut,ivan,phd,it" />
+  
+
+  <meta name="description" content="这几天终于搞定了ubuntu的影音播放问题，格式基本上我平常用得着的都支持的差不多了..........  视频方面：装了mplayer和smplayer软件本身装都很方便，主要就是要另装一解码包w32codecs来支持rmvb，avi等等常用格式；主要麻烦的地方在于部分视频字幕的设置，需要手动关联一下简体字库，要不然就会出现乱码情况，总的感觉smplayer做为前台用起来比直接用mplayer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu影音设置">
+<meta property="og:url" content="http://www.ivivan.com/2009/02/27/ubuntu-e5-bd-b1-e9-9f-b3-e8-ae-be-e7-bd-ae/index.html">
+<meta property="og:site_name" content="Hear The Wind Sing">
+<meta property="og:description" content="这几天终于搞定了ubuntu的影音播放问题，格式基本上我平常用得着的都支持的差不多了..........  视频方面：装了mplayer和smplayer软件本身装都很方便，主要就是要另装一解码包w32codecs来支持rmvb，avi等等常用格式；主要麻烦的地方在于部分视频字幕的设置，需要手动关联一下简体字库，要不然就会出现乱码情况，总的感觉smplayer做为前台用起来比直接用mplayer">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2009-02-27T09:29:59.000Z">
+<meta property="article:modified_time" content="2022-12-21T11:28:01.345Z">
+<meta property="article:author" content="Ivan">
+<meta name="twitter:card" content="summary">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-41831109-2', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+
+  
+
+
+  
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">L</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">L</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            S
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            T
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            M
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-ubuntu-e5-bd-b1-e9-9f-b3-e8-ae-be-e7-bd-ae" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">ubuntu影音设置</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2009.02.27</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Ivan</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C%E7%9B%B8%E5%85%B3/">工作相关</a>
+  </span>
+
+
+
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <div id="msgcns!1326AB98D6395CF4!249" class="bvMsg"> 这几天终于搞定了ubuntu的影音播放问题，格式基本上我平常用得着的都支持的差不多了..........
+
+<p>视频方面：装了mplayer和smplayer<br>软件本身装都很方便，主要就是要另装一解码包w32codecs来支持rmvb，avi等等常用格式；主要麻烦的地方在于部分视频字幕的设置，需要手动关联一下简体字库，要不然就会出现乱码情况，总的感觉smplayer做为前台用起来比直接用mplayer要方便一些，更接近于win的习惯，而且smplayer的记忆播放位置功能我感觉很不错。<br>音频方面：用的Rhythmbox<br>软件本身自带，但要想正常使用还得装不少附加产品。要支持mp3需要sudo apt-get install gstreamer0.10-*plugins-ugly<br>要支持wma需要sudo apt-get install gstreamer0.10-ffmpeg<br>主要麻烦在于对乱码的解决，步骤如下：转</p>
+<p>首先，需要有软件包mid3iconv。
+<p>可以通过如下代码自动安装：
+sudo apt-get install python-mutagen 　　
+然后转到你的MP3目录，执行以全命令进行转换：
+mid3iconv -e GBK *.mp3 　　
+如果需要包含子目录，可以将后缀改成如下格式：
+mid3iconv -e GBK */*.mp3 
+最后，重新导入一次rhythmbox就OK了
+解决Rhythmbox乱码 
+<p>子目录可同理包含多层
+
+</div>
+    
+  </div>
+
+</article>
+
+
+   
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2009/02/24/ubuntu-e8-80-b3-e6-9c-ba-e9-97-ae-e9-a2-98-e8-bd-ac/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2009/02/27/e5-8d-8e-e7-a1-95a3e-e6-91-84-e5-83-8f-e5-a4-b4-e5-ae-89-e8-a3-85-ubuntu/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              S
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              T
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              M
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
